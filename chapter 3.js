@@ -585,7 +585,7 @@ function splitNode(head, split) {
 	slowPtr.next = split.head1;
 }
 
-//Problem-41 For a given K value (K>0) reverse blocks of K nodes in a list.
+//Problem-39 For a given K value (K>0) reverse blocks of K nodes in a list.
 //Recursive version
 var reverseKNodesRecursive = function(head, K) {
 	var current = head,
@@ -638,35 +638,28 @@ var reverseKNodes = function(head, K) {
 	return head;
 };
 
-var headNode = new ListNode();
-var temp1 = new ListNode();
-var temp2 = new ListNode();
-var temp3 = new ListNode();
-var temp4 = new ListNode();
-var temp5 = new ListNode();
-var temp6 = new ListNode();
-var temp7 = new ListNode();
-headNode.data = 5;
-headNode.next = temp1;
-temp1.data = 10;
-temp1.next = temp2;
-temp2.data = 20;
-temp2.next = temp3;
-temp3.data = 30;
-temp3.next = temp4;
-temp4.data = 15;
-temp4.next = temp5;
-temp5.data = 25;
-temp5.next = temp6;
-temp6.data = 35;
-temp6.next = temp7;
-temp7.data = 70;
-// temp7.next = headNode;
-// var head1 = new ListNode();
-// var head2 = new ListNode();
-// var split = {head1, head2};
-console.log("Length of List: " + ListLength(headNode));
-PrintListData(headNode);
-headNode = reverseKNodes(headNode, 4);
-PrintListData(headNode);
-// PrintCircularListData(headNode);
+//Problem-41 Josephus Circle: Josephus Problem (or Josephus permutation) is a theoretical problem related to a certain counting-out game.
+//N people have decided to elect a leader by arranging themselves in a circle and eliminating every Mth person around the circle.
+//Assume input is circular linked list with N nodes and each node has a number [1 - N] associated with it. The head node has number 1 as data.
+function getJosephusPosition(N, M) {
+	var i, j, temp, head = new ListNode();
+	//Create a circular linked list containing all the players
+	head.data = 1;
+	temp = head;
+	for (i = 2; i <= N; i++) {
+		var tmp = new ListNode();
+		tmp.data = i;
+		head.next = tmp;
+		head = head.next;
+	}
+	head.next = temp; //Close circular list by pointing last element to first
+	head = head.next; //Move head position to a node where node.data = 1
+	PrintCircularListData(head); //Only to check how many nodes are there
+	for (i = N; i > 1; i--) {
+		for (j = 0; j < M-1; j++) { //Because Mth person is at M-1 distance
+			head = head.next;
+		}
+		head.next = head.next.next;
+	}
+	console.log("Last player left standing is: ", head.data);
+}
