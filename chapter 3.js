@@ -1,5 +1,3 @@
-/*jslint browser: true*/
-/*jslint white: true */
 // 3.6 Single Linked Lists
 var ListNode = function() {
 	return {
@@ -558,7 +556,7 @@ var reversePairIterative = function(head) {
 };
 
 //Problem-36 Split a Circular Linked List into two equal parts. If the numbers of nodes in the list are odd then make first list one node extra than second one.
-//split must cointains head1 and head2 in it. (i.e. var split = {head1, head2};)
+//Use namespace split, which must cointains head1 and head2 in it. (i.e. var split = {head1, head2};)
 function splitNode(head, split) {
 	var slowPtr = head, fastPtr = head;
 	if (head === null) {
