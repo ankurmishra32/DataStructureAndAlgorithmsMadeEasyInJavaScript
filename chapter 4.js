@@ -1,67 +1,67 @@
 /*jslint white: true */
 //4.6 Implementation
 //Simple Array Implementation of Stack
-var ArrayStack = function () {
+var ArrayStack = function (size) {
+	//private
+	var top =  -1,
+		capacity = size,
+		array =	[];
 	return {
-		top: -1,
-		capacity: 1,
-		array: [],
-
 		isEmpty: function () {
-			return (this.top === -1);
+			return (top === -1);
 		},
 		isStackFull: function () {
-			return (this.top === (this.capacity - 1));
+			return (top === (capacity - 1));
 		},
 		pushInStack: function (data) {
 			if(this.isStackFull()) {
-				console.log("Stack Overflow");
+				console.error("Stack Overflow");
 			} else {
-				this.array[++(this.top)] = data;
+				array[++top] = data;
 			}
 		},
 		popFromStack: function () {
 			if(this.isEmpty()) {
-				console.log("Stack is Empty");
+				console.error("Stack is Empty");
 				return;
 			}
-			return this.array[this.top--];
+			return array[top--];
 		}
 	};
 };
 
 //Dynamic Array Implementation of Stack
 //In JavaScript, array is already dynamic in nature
-var DynArrayStack = function () {
+var DynArrayStack = function (size) {
+	//private
+	var top = -1,
+		capacity = size,
+		array = [];
 	return {
-		top: -1,
-		capacity: 1,
-		array: [],
-
-		isEmpty: function(){
-			return (this.top === -1);
+		isEmpty: function () {
+			return top === -1;
 		},
-		isStackFull: function(){
-			return (this.top === (this.capacity - 1));
+		isStackFull: function () {
+			return top === capacity - 1;
 		},
-		doubleStack: function(){
-			this.capacity *= 2;
+		doubleStack: function () {
+			capacity *= 2;
 		},
-		deleteStack: function(){
-			this.top = -1;
+		deleteStack: function () {
+			top = -1;
 		},
-		pushInStack: function(data){
-			if(this.isStackFull()){
+		pushInStack: function (data) {
+			if (this.isStackFull()) {
 				this.doubleStack();
 			}
-			this.array[++(this.top)]=data;
+			array[++top] = data;
 		},
-		popFromStack: function(){
-			if(this.isEmpty()){
-				console.log("Stack is Empty");
+		popFromStack: function () {
+			if (this.isEmpty()) {
+				console.error("Stack is Empty");
 				return;
 			}
-			return this.array[this.top--];
+			return array[top--];
 		}
 	};
 };
@@ -75,42 +75,42 @@ var ListNode = function() {
 };
 
 var LLStack = function () {
+	var headNode = new ListNode();
 	return {
-		headNode: new ListNode(),
-		top: function(){
-			if(this.headNode === null){
+		top: function () {
+			if (headNode === null){
 				return null;
 			}
-			return this.headNode.data;
+			return headNode.data;
 		},
-		isEmpty: function(){
-			if(this.headNode === null)
+		isEmpty: function () {
+			if (headNode === null)
 				return true;
 			return false;
 		},
-		deleteStack: function(){
-			this.headNode = null;
+		deleteStack: function () {
+			headNode = null;
 		},
-		pushInStack: function(data){
-			if(this.headNode === null) {
-				this.headNode = new ListNode();
-				this.headNode.data = data;
-			} else if(this.headNode.data === null) {
-				this.headNode.data = data;
+		pushInStack: function (data) {
+			if (headNode === null) {
+				headNode.data = data;
+				headNode = new ListNode();
+			} else if (headNode.data === null) {
+				headNode.data = data;
 			} else {
 				var llNode = new ListNode();
 				llNode.data = data;
-				llNode.next = this.headNode;
-				this.headNode = llNode;
+				llNode.next = headNode;
+				headNode = llNode;
 			}
 		},
-		popFromStack: function(){
-			if(this.headNode === null){
-				console.log("Stack is Empty");
+		popFromStack: function () {
+			if (headNode === null){
+				console.error("Stack is Empty");
 				return;
 			}
-			var data = this.headNode.data;
-			this.headNode = this.headNode.next;
+			var data = headNode.data;
+			headNode = headNode.next;
 			return data;
 		}
 	};
@@ -122,7 +122,7 @@ var LLStack = function () {
 var infix2postfix = function (infix) {
 	var bwParnt, postfix = "",
 		operator = new LLStack();
-	for(var i = 0; i < infix.length; i++) {
+	for (var i = 0; i < infix.length; i++) {
 		if ((infix.charCodeAt(i) >= 32 && infix.charCodeAt(i) <= 47) ||
 			(infix.charCodeAt(i) >= 58 && infix.charCodeAt(i) <= 64) ||
 			(infix.charCodeAt(i) >= 91 && infix.charCodeAt(i) <= 96) ||
@@ -136,8 +136,7 @@ var infix2postfix = function (infix) {
 			} else {
 				operator.pushInStack(infix[i]);
 			}
-		}
-		else {
+		} else {
 			postfix += infix[i];
 		}
 	}
