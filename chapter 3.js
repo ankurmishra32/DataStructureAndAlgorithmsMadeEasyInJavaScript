@@ -1,173 +1,225 @@
 // 3.6 Single Linked Lists
-var ListNode = function() {
+function ListNode() {
+	var data = null,
+		next = null;
+
+	//closure
 	return {
-		data: null,
-		next: null
+		setData: function(data) {
+			this.data = data;
+		},
+		getData: function() {
+			return this.data;
+		},
+		setNext: function(node) {
+			this.next = node;
+		},
+		getNext: function() {
+			return this.next;
+		}
 	};
-};
+}
 
 //Traversing the Linked List
-var ListLength = function(headNode) {
-	var length = 0;
-	var currentNode = headNode;
-	while (currentNode !== null) {
+function ListLength(headNode) {
+	var length = 0,
+		currentNode = headNode;
+
+	while (currentNode) {
 		length++;
-		currentNode = currentNode.next;
+		currentNode = currentNode.getNext();
 	}
 	return length;
-};
+}
 
 //Inserting a node in Singly Linked List
-var InsertInLinkedList = function(headNode, nodeToInsert, position) {
-	if (headNode.data === null) { //inserting at the beginning when no LinkList present
-		return nodeToInsert;
+function InsertInLinkedList(headNode, nodeToInsert, position) {
+	var size, count = 1,
+		previousNode, currentNode;
+	if (!headNode || !headNode.getData()) { //inserting at the beginning when no LinkList present
+		headNode = nodeToInsert;
+		return;
 	}
-	var size = ListLength(headNode);
+	size = ListLength(headNode);
 	if (position > size + 1 || position < 1) {
-		console.log("Position of node to insert is invalid. The valid inputs are 1 to " + (size + 1));
-		return headNode;
+		console.error("Position of node to insert is invalid. The valid inputs are 1 to " + (size + 1));
+		return;
 	}
 	if (position === 1) { //inserting at the beginning when there is some LinkList present
-		nodeToInsert.next = headNode;
-		return nodeToInsert;
+		nodeToInsert.setNext(headNode);
+		headNode = nodeToInsert;
+		return;
 	}
-	var previousNode = headNode;
-	var count = 1;
+	previousNode = headNode;
 	while (count < position - 1) {
-		previousNode = previousNode.next;
+		previousNode = previousNode.getNext();
 		count++;
 	}
-	var currentNode = previousNode.next;
-	nodeToInsert.next = currentNode;
-	previousNode.next = nodeToInsert;
-	return headNode;
-};
+	currentNode = previousNode.getNext();
+	nodeToInsert.setNext(currentNode);
+	previousNode.setNext(nodeToInsert);
+}
 
 //Deleting a node in Singly Linked List
-var DeleteNodeFromLinkedList = function(headNode, position) {
-	var currentNode = new ListNode();
-	var size = ListLength(headNode);
+function DeleteNodeFromLinkedList(headNode, position) {
+	var count = 1,
+		previousNode,
+		currentNode = new ListNode(),
+		size = ListLength(headNode);
 	if (position > size || position < 1) {
-		console.log("Position of node to delete is invalid. The valid inputs are 1 to " + size);
-		return headNode;
+		console.error("Position of node to delete is invalid. The valid inputs are 1 to " + size);
+		return;
 	}
 	if (position === 1) { //deletion the node in the beginning
-		currentNode = headNode.next;
-		headNode = null;
-		return currentNode;
+		currentNode = headNode.getNext();
+		headNode = currentNode;
+		return;
 	}
-	var previousNode = headNode;
-	var count = 1;
+	previousNode = headNode;
 	while (count < position - 1) {
-		previousNode = previousNode.next;
+		previousNode = previousNode.getNext();
 		count++;
 	}
-	currentNode = previousNode.next;
-	previousNode.next = currentNode.next;
+	currentNode = previousNode.getNext();
+	previousNode.setNext(currentNode.getNext());
 	currentNode = null;
-	return headNode;
-};
+}
 
 //Printing the content of a Linked List
 function PrintListData(headNode) {
-	var string = "";
-	var currentNode = headNode;
-	while (currentNode !== null) {
-		string += "->" + currentNode.data;
-		currentNode = currentNode.next;
+	var string = "",
+		currentNode = headNode;
+	while (currentNode) {
+		string += "->" + currentNode.getData();
+		currentNode = currentNode.getNext();
 	}
 	console.log("List Elements", string);
 }
 
 //----------
 //3.7 Doubly Linked Lists
-var DLLNode = function() {
+function DLLNode() {
+	var data = null,
+		next = null,
+		previous = null;
+
+	//closure
 	return {
-		data: null,
-		next: null,
-		previous: null
+		setData: function(data) {
+			this.data = data;
+		},
+		getData: function() {
+			return this.data;
+		},
+		setNext: function(node) {
+			this.next = node;
+		},
+		getNext: function() {
+			return this.next;
+		},
+		setPrevious: function(node) {
+			this.previous = node;
+		},
+		getPrevious: function() {
+			return this.previous;
+		}
 	};
-};
+}
 
 //Inserting a node in Doubly Linked List
-
-var DLLInsert = function(headNode, nodeToInsert, position) {
-	if (headNode.data === null) { //inserting at the beginning when no LinkList present
-		return nodeToInsert;
+function DLLInsert(headNode, nodeToInsert, position) {
+	var size, count = 1,
+		previousNode, currentNode;
+	if (!headNode || !headNode.getData()) { //inserting at the beginning when no LinkList present
+		headNode = nodeToInsert;
+		return
 	}
-	var size = ListLength(headNode);
+	size = ListLength(headNode);
 	if (position > size + 1 || position < 1) {
-		console.log("Position of node to insert is invalid. The valid inputs are 1 to " + (size + 1));
-		return headNode;
+		console.error("Position of node to insert is invalid. The valid inputs are 1 to " + (size + 1));
+		return;
 	}
 	if (position === 1) { //inserting at the beginning when there is some LinkList present
-		nodeToInsert.next = headNode;
-		headNode.previous = nodeToInsert;
-		return nodeToInsert;
+		nodeToInsert.setNext(headNode);
+		headNode.setPrevious(nodeToInsert);
+		headNode = nodeToInsert;
+		return;
 	}
-	var previousNode = headNode;
-	var count = 1;
+	previousNode = headNode;
 	while (count < position - 1) {
-		previousNode = previousNode.next;
+		previousNode = previousNode.getNext();
 		count++;
 	}
-	var currentNode = previousNode.next;
-	nodeToInsert.next = currentNode;
-	if (currentNode !== null) {
-		currentNode.previous = nodeToInsert;
+	currentNode = previousNode.getNext();
+	nodeToInsert.setNext(currentNode);
+	if (currentNode) {
+		currentNode.setPrevious(nodeToInsert);
 	}
-	previousNode.next = nodeToInsert;
-	nodeToInsert.previous = previousNode;
-	return headNode;
-};
+	previousNode.setNext(nodeToInsert);
+	nodeToInsert.setPrevious(previousNode);
+}
 
 //Deleting a node in Doubly Linked List
-
-var DLLDelete = function(headNode, position) {
-	var currentNode = new ListNode();
-	var size = ListLength(headNode);
+function DLLDelete(headNode, position) {
+	var count = 1,
+		laterNode,
+		previousNode,
+		currentNode = new ListNode(),
+		size = ListLength(headNode);
 	if (position > size || position < 1) {
-		console.log("Position of node to delete is invalid. The valid inputs are 1 to " + size);
-		return headNode;
+		console.error("Position of node to delete is invalid. The valid inputs are 1 to " + size);
+		return;
 	}
 	if (position === 1) { //deletion the node in the beginning
-		currentNode = headNode.next;
-		currentNode.previous = null;
-		headNode = null;
-		return currentNode;
+		currentNode = headNode.getNext();
+		currentNode.setPrevious(null);
+		headNode = currentNode;
+		return;
 	}
-	var previousNode = headNode;
-	var count = 1;
+	previousNode = headNode;
 	while (count < position - 1) {
-		previousNode = previousNode.next;
+		previousNode = previousNode.getNext();
 		count++;
 	}
-	currentNode = previousNode.next;
-	var laterNode = currentNode.next;
-	previousNode.next = laterNode;
-	if (laterNode !== null) {
-		laterNode.previous = previousNode;
+	currentNode = previousNode.getNext();
+	laterNode = currentNode.getNext();
+	previousNode.setNext(laterNode);
+	if (laterNode) {
+		laterNode.setPrevious(previousNode);
 	}
 	currentNode = null;
-	return headNode;
-};
+}
 
 //----------
 // 3.8 Single Linked Lists
-var CLLNode = function() {
+function CLLNode() {
+	var data = null,
+		next = null;
+
+	//closure
 	return {
-		data: null,
-		next: null
+		setData: function(data) {
+			this.data = data;
+		},
+		getData: function() {
+			return this.data;
+		},
+		setNext: function(node) {
+			this.next = node;
+		},
+		getNext: function() {
+			return this.next;
+		}
 	};
-};
+}
 
 //Traversing the Linked List
-var CircularListLength = function(headNode) {
-	var length = 0;
-	var currentNode = headNode;
-	while (currentNode !== null) {
+function CircularListLength(headNode) {
+	var length = 0,
+		currentNode = headNode;
+	while (currentNode) {
 		length++;
-		currentNode = currentNode.next;
+		currentNode = currentNode.getNext();
 		if (currentNode === headNode) {
 			break;
 		}
@@ -177,11 +229,11 @@ var CircularListLength = function(headNode) {
 
 //Printing the content of a Circular List
 function PrintCircularListData(headNode) {
-	var string = "";
-	var currentNode = headNode;
-	while (currentNode !== null) {
-		string += "->" + currentNode.data;
-		currentNode = currentNode.next;
+	var string = "",
+		currentNode = headNode;
+	while (currentNode) {
+		string += "->" + currentNode.getData();
+		currentNode = currentNode.getNext();
 		if (currentNode === headNode) {
 			break;
 		}
@@ -192,58 +244,57 @@ function PrintCircularListData(headNode) {
 //Inserting a Node at the End of a Circular Linked List
 function InsertAtEndInCLL(headNode, nodeToInsert) {
 	var currentNode = headNode;
-	while (currentNode.next !== headNode) {
-		currentNode = currentNode.next;
+	while (currentNode.getNext() !== headNode) {
+		currentNode = currentNode.getNext();
 	}
-	nodeToInsert.next = headNode;
-	currentNode.next = nodeToInsert;
+	nodeToInsert.setNext(headNode);
+	currentNode.setNext(nodeToInsert);
 }
 
 //Inserting a Node at Front of a Circular Linked List
-var InsertAtBeginingInCLL = function(headNode, nodeToInsert) {
+function InsertAtBeginingInCLL(headNode, nodeToInsert) {
 	var currentNode = headNode;
-	while (currentNode.next !== headNode) {
-		currentNode = currentNode.next;
+	while (currentNode.getNext() !== headNode) {
+		currentNode = currentNode.getNext();
 	}
-	if (headNode === null) {
-		nodeToInsert.next = nodeToInsert;
+	if (!headNode) {
+		nodeToInsert.setNext(nodeToInsert);
 	} else {
-		nodeToInsert.next = headNode;
-		currentNode.next = nodeToInsert;
+		nodeToInsert.setNext(headNode);
+		currentNode.setNext(nodeToInsert);
 	}
-	return nodeToInsert;
-};
+	headNode = nodeToInsert;
+}
 
 //Deleting the Last Node in a Circular Linked List
 function DeleteLastNodeFromCLL(headNode) {
-	var temp = headNode;
-	var currentNode = headNode;
-	if (headNode === null) {
-		console.log("List Empty");
+	var temp = headNode,
+		currentNode = headNode;
+	if (!headNode) {
+		console.error("List Empty");
 		return;
 	}
-	while (currentNode.next !== headNode) {
+	while (currentNode.getNext() !== headNode) {
 		temp = currentNode;
-		currentNode = currentNode.next;
+		currentNode = currentNode.getNext();
 	}
 	currentNode = null;
-	temp.next = headNode;
-	return;
+	temp.setNext(headNode);
 }
 
 //Deleting the First Node in a Circular Linked List
-var DeleteFrontNodeFromCLL = function(headNode) {
+function DeleteFrontNodeFromCLL(headNode) {
 	var currentNode = headNode;
-	if (headNode === null) {
-		console.log("List Empty");
+	if (!headNode) {
+		console.error("List Empty");
 		return;
 	}
-	while (currentNode.next !== headNode) {
-		currentNode = currentNode.next;
+	while (currentNode.getNext() !== headNode) {
+		currentNode = currentNode.getNext();
 	}
-	currentNode.next = headNode.next;
-	return headNode.next;
-};
+	currentNode.setNext(headNode.getNext());
+	headNode = headNode.getNext();
+}
 
 //----------
 //Problem-2 Find nth node from the end of Linked List
@@ -252,28 +303,28 @@ var DeleteFrontNodeFromCLL = function(headNode) {
 function nThNodeFromEnd(headNode, position) {
 	var length = ListLength(headNode);
 	if ((length < position) || (length < 1)) {
-		console.log("Fewer no of nodes in the list");
+		console.error("Fewer no of nodes in the list");
 		return;
 	}
 	if (length === position) {
 		console.log("nTh node from end is ", headNode);
 		return;
 	}
-	nThNodeFromEnd(headNode.next, position);
+	nThNodeFromEnd(headNode.getNext(), position);
 }
 
 //Problem-4 Can we use Problem-3 approach for solving Problem-2 without creating hash table
 function nThNodeFromEndWithoutHash(headNode, position) {
 	var length = ListLength(headNode);
 	if ((length < position) || (length < 1)) {
-		console.log("Fewer no of nodes in the list");
+		console.error("Fewer no of nodes in the list");
 		return;
 	}
 	var beginingPos = length - position + 1;
 	var currentNode = headNode;
 	var count = 1;
 	while (count < beginingPos) {
-		currentNode = currentNode.next;
+		currentNode = currentNode.getNext();
 		count++;
 	}
 	console.log("nTh node from end is ", currentNode);
@@ -284,41 +335,44 @@ function nThNodeFromEndInOneScan(headNode, position) {
 	var pTemp = headNode,
 		nThNode = headNode,
 		count = 0;
-	while (pTemp !== null) {
+	while (pTemp) {
 		count++;
 		if (position - count < 0) {
-			nThNode = nThNode.next;
+			nThNode = nThNode.getNext();
 		}
-		pTemp = pTemp.next;
+		pTemp = pTemp.getNext();
 	}
 	if (count >= position) {
 		console.log("nTh node from end is ", nThNode);
 		return;
 	}
-	console.log("Fewer no of nodes in the list");
+	console.error("Fewer no of nodes in the list");
 }
 
 //Problem-6 Check whether the given linked list is either NULL-terminated or ends in cycle
 //There is one way with hash value (Defined in Problem-7) and an efficient way (defined in Problem-9)
-var isLinkedListContainsLoop = function(headNode) {
-	var slowPtr = headNode,
+function isLinkedListContainsLoop(headNode) {
+	var flag = false;
+	slowPtr = headNode,
 		fastPtr = headNode;
-	while (slowPtr !== null && fastPtr !== null) {
-		fastPtr = fastPtr.next;
-		if (fastPtr === null) {
-			return false;
+	while (slowPtr && fastPtr) {
+		fastPtr = fastPtr.getNext();
+		if (!fastPtr) {
+			break;
 		}
 		if (slowPtr === fastPtr) {
-			return true;
+			flag = true;
+			break;
 		}
-		fastPtr = fastPtr.next;
+		fastPtr = fastPtr.getNext();
 		if (slowPtr === fastPtr) {
-			return true;
+			flag = true;
+			break;
 		}
-		slowPtr = slowPtr.next;
+		slowPtr = slowPtr.getNext();
 	}
-	return false;
-};
+	return flag;
+}
 
 //Problem-11 Check whether the given linked list is either NULL-terminated or not. If there is a cycle, find the start node of the loop
 //Its the extended version of previous solution (Problem-9).
@@ -326,9 +380,9 @@ function findBegninOfLoop(headNode) {
 	var slowPtr = headNode,
 		fastPtr = headNode,
 		loopExist = false;
-	while (fastPtr !== null && fastPtr.next !== null) {
-		fastPtr = fastPtr.next.next;
-		slowPtr = slowPtr.next;
+	while (fastPtr && fastPtr.getNext()) {
+		fastPtr = fastPtr.getNext().getNext();
+		slowPtr = slowPtr.getNext();
 		if (slowPtr === fastPtr) {
 			loopExist = true;
 			break;
@@ -337,12 +391,12 @@ function findBegninOfLoop(headNode) {
 	if (loopExist) {
 		slowPtr = headNode;
 		while (slowPtr !== fastPtr) {
-			fastPtr = fastPtr.next;
-			slowPtr = slowPtr.next;
+			fastPtr = fastPtr.getNext();
+			slowPtr = slowPtr.getNext();
 		}
 		console.log("Loop start from", slowPtr);
 	} else {
-		console.log("Loop does not exist");
+		console.error("Loop does not exist");
 	}
 }
 
@@ -352,18 +406,18 @@ function findLoopLength(headNode) {
 		fastPtr = headNode,
 		loopExist = false,
 		count = 1;
-	while (fastPtr !== null && fastPtr.next !== null) {
-		fastPtr = fastPtr.next.next;
-		slowPtr = slowPtr.next;
+	while (fastPtr && fastPtr.getNext()) {
+		fastPtr = fastPtr.getNext().getNext();
+		slowPtr = slowPtr.getNext();
 		if (slowPtr === fastPtr) {
 			loopExist = true;
 			break;
 		}
 	}
 	if (loopExist) {
-		fastPtr = fastPtr.next;
+		fastPtr = fastPtr.getNext();
 		while (slowPtr !== fastPtr) {
-			fastPtr = fastPtr.next;
+			fastPtr = fastPtr.getNext();
 			count++;
 		}
 		console.log("Loop length is ", count);
@@ -373,257 +427,263 @@ function findLoopLength(headNode) {
 }
 
 //Problem-15 Insert a node in a sorted linked list
-var insertInSortedList = function(headNode, newNode) {
-	var previousNode, currentNode = headNode;
-	if (headNode === null) {
-		return newNode;
+function insertInSortedList(headNode, newNode) {
+	var previousNode,
+		currentNode = headNode;
+	if (!headNode) {
+		headNode = newNode;
+		return;
 	}
-	while (currentNode !== null && currentNode.data < newNode.data) {
+	while (currentNode && currentNode.getData() < newNode.getData()) {
 		previousNode = currentNode;
-		currentNode = currentNode.next;
+		currentNode = currentNode.getNext();
 	}
-	previousNode.next = newNode;
-	newNode.next = currentNode;
-	return headNode;
-};
+	previousNode.setNext(newNode);
+	newNode.setNext(currentNode);
+}
 
 //Problem-16 Reverse a singly linked list
-var reserveList = function(headNode) {
+function reserveList(headNode) {
 	var temp = null,
 		nextNode = null;
-	while (headNode !== null) {
-		nextNode = headNode.next;
-		headNode.next = temp;
+	while (headNode) {
+		nextNode = headNode.getNext();
+		headNode.setNext(temp);
 		temp = headNode;
 		headNode = nextNode;
 	}
-	return temp;
-};
+	headNode = temp;
+}
 
 //Problem-17 Suppose there are two singly linked list both of which intersect at some point and become single linked list...
 //Brute-Force Approach
-var findIntersectingNodeBruteForce = function(headOfFirst, headOfSecond) {
+function findIntersectingNodeBruteForce(headOfFirst, headOfSecond) {
 	var temp = headOfSecond;
-	while (headOfFirst !== null) {
-		while (headOfSecond !== null) {
+	while (headOfFirst) {
+		while (headOfSecond) {
 			if (headOfFirst === headOfSecond) {
 				return headOfFirst;
 			}
-			headOfSecond = headOfSecond.next;
+			headOfSecond = headOfSecond.getNext();
 		}
-		headOfFirst = headOfFirst.next;
+		headOfFirst = headOfFirst.getNext();
 		headOfSecond = temp;
 	}
 	return null;
-};
+}
 
 //Problem-23 Can we improve the complexity of Problem-17
 //Efficient Approach
-var findIntersectingNode = function(headOfFirst, headOfSecond) {
-	var lengthOfFirst = ListLength(headOfFirst);
-	var lengthOfSecond = ListLength(headOfSecond);
-	var diff = lengthOfFirst - lengthOfSecond;
+function findIntersectingNode(headOfFirst, headOfSecond) {
+	var i, temp,
+		lengthOfFirst = ListLength(headOfFirst),
+		lengthOfSecond = ListLength(headOfSecond),
+		diff = lengthOfFirst - lengthOfSecond;
 	if (lengthOfFirst < lengthOfSecond) {
-		var temp = headOfFirst;
+		temp = headOfFirst;
 		headOfFirst = headOfSecond;
 		headOfSecond = temp;
 		diff = lengthOfSecond - lengthOfFirst;
 	}
-	var i;
 	for (i = 0; i < diff; i++) {
-		headOfFirst = headOfFirst.next;
+		headOfFirst = headOfFirst.getNext();
 	}
-	while (headOfFirst !== null && headOfSecond !== null) {
+	while (headOfFirst && headOfSecond) {
 		if (headOfFirst === headOfSecond) {
 			return headOfFirst;
 		}
-		headOfFirst = headOfFirst.next;
-		headOfSecond = headOfSecond.next;
+		headOfFirst = headOfFirst.getNext();
+		headOfSecond = headOfSecond.getNext();
 	}
 	return null;
-};
+}
 
 //Problem-24 How will you find the middle of the linked list?
 //Brute-Force Approach
-var findMiddleBruteForce = function(headNode) {
-	var temp, count1 = 0, count2;
-	while (headNode !== null && headNode.next !== null) {
-		count1++;
+function findMiddleBruteForce(headNode) {
+	var temp,
+		count1 = 0,
 		count2 = 0;
-		temp = headNode.next;
-		while (temp !== null) {
-			temp = temp.next;
+	while (headNode && headNode.getNext()) {
+		count1++;
+		temp = headNode.getNext();
+		while (temp) {
+			temp = temp.getNext();
 			count2++;
 		}
 		if (count1 >= count2) {
 			return headNode;
 		}
-		headNode = headNode.next;
+		headNode = headNode.getNext();
+		count2 = 0;
 	}
-};
+}
 
 //Problem-25 Can we improve the complexity of Problem-24?
 //By finding length
-var findMiddleByLength = function(headNode) {
-	var length = 0;
-	var temp = headNode;
-	while (headNode !== null) {
-		headNode = headNode.next;
+function findMiddleByLength(headNode) {
+	var middle,
+		length = 0,
+		temp = headNode;
+	while (headNode) {
+		headNode = headNode.getNext();
 		length++;
 	}
-	var middle = parseInt((length / 2), 10);
+	middle = parseInt((length / 2), 10);
 	length = 0;
 	while (length !== middle) {
-		temp = temp.next;
+		temp = temp.getNext();
 		length++;
 	}
 	return temp;
-};
+}
 
 //Problem-27 Can we solve Problem-24 in one scan?
 //Efficient Approach
-var findMiddle = function(headNode) {
+function findMiddle(headNode) {
 	var i = 0,
 		temp = headNode;
-	while (headNode !== null) {
+	while (headNode) {
 		if (i === 0) {
 			i = 1;
-			headNode = headNode.next;
+			headNode = headNode.getNext();
 		} else if (i === 1) {
 			i = 0;
-			temp = temp.next;
-			headNode = headNode.next;
+			temp = temp.getNext();
+			headNode = headNode.getNext();
 		}
 	}
 	return temp;
-};
+}
 
 //Problem-28 How will you display a linked list from the end?
 //Traverse recursively till the end
 function PrintListFromTheEnd(headNode) {
-	if (headNode === null) {
+	if (!headNode) {
 		return;
 	}
-	PrintListFromTheEnd(headNode.next);
-	console.log(headNode.data);
+	PrintListFromTheEnd(headNode.getNext());
+	console.log(headNode.getData());
 }
 
 //Problem-31 Given two sorted linked lists, we need to merge them into the third list in sorted order
-var mergeList = function(headOfFirst, headOfSecond) {
+function mergeList(headOfFirst, headOfSecond) {
 	var temp = new ListNode();
-	if (headOfFirst === null) {
+	if (!headOfFirst) {
 		return headOfSecond;
 	}
-	if (headOfSecond === null) {
+	if (!headOfSecond) {
 		return headOfFirst;
 	}
-	if (headOfFirst.data <= headOfSecond.data) {
+	if (headOfFirst.getData() <= headOfSecond.getData()) {
 		temp = headOfFirst;
-		temp.next = mergeList(headOfFirst.next, headOfSecond);
+		temp.setNext(mergeList(headOfFirst.getNext(), headOfSecond));
 	} else {
 		temp = headOfSecond;
-		temp.next = mergeList(headOfFirst, headOfSecond.next);
+		temp.setNext(mergeList(headOfFirst, headOfSecond.getNext()));
 	}
 	return temp;
-};
+}
 
 //Problem-32 Reverse the linked list in pairs.
 //Recursive version
 var reversePairRecursive = function(head) {
-	if (head === null || head.next === null) {
+	if (!head || !head.getNext()) {
 		return head;
 	}
-	var curr = head.next;
-	head.next = reversePairRecursive(curr.next);
-	curr.next = head;
+	var curr = head.getNext();
+	head.setNext(reversePairRecursive(curr.getNext()));
+	curr.setNext(head);
 	return curr;
 };
 //Iterative version
-var reversePairIterative = function(head) {
+function reversePairIterative(head) {
 	var temp = new ListNode();
-	temp.next = head;
+	temp.setNext = head;
 	var prev = temp,
 		curr = head;
-	while (curr !== null && curr.next !== null) {
-		var tmp = curr.next.next;
-		curr.next.next = prev.next;
-		prev.next = curr.next;
-		curr.next = tmp;
+	while (curr !== null && curr.getNext() !== null) {
+		var tmp = curr.getNext().getNext();
+		curr.getNext().setNext(prev.getNext());
+		prev.setNext(curr.getNext());
+		curr.setNext(tmp);
 		prev = curr;
-		curr = prev.next;
+		curr = prev.getNext();
 	}
-	return temp.next;
-};
+	return temp.getNext();
+}
 
 //Problem-36 Split a Circular Linked List into two equal parts. If the numbers of nodes in the list are odd then make first list one node extra than second one.
 //Use namespace split, which must cointains head1 and head2 in it. (i.e. var split = {head1, head2};)
 function splitNode(head, split) {
-	var slowPtr = head, fastPtr = head;
-	if (head === null) {
+	var slowPtr = head,
+		fastPtr = head;
+	if (!head) {
 		return;
 	}
 	/*If there are odd nodes in circular list then fastPtr.next 
 	become head and for even nodes, fastPtr.next.next become head*/
-	while (fastPtr.next !== head && fastPtr.next.next !== head) {
-		fastPtr = fastPtr.next.next;
-		slowPtr = slowPtr.next;
+	while (fastPtr.getNext() !== head && fastPtr.getNext().getNext() !== head) {
+		fastPtr = fastPtr.getNext().getNext();
+		slowPtr = slowPtr.getNext();
 	}
 	/*If there are even nodes, move fastPtr*/
-	if (fastPtr.next.next === head) {
-		fastPtr = fastPtr.next;
+	if (fastPtr.getNext().getNext() === head) {
+		fastPtr = fastPtr.getNext();
 	}
 	/*Set the head of first half*/
 	split.head1 = head;
 	/*Set the head of second half*/
-	if(head.next !== head) {
-		split.head2 = slowPtr.next;
+	if (head.getNext() !== head) {
+		split.head2 = slowPtr.getNext();
 	}
 	/*Make both list circular*/
-	fastPtr.next = split.head2;
-	slowPtr.next = split.head1;
+	fastPtr.setNext(split.head2);
+	slowPtr.setNext(split.head1);
 }
 
 //Problem-39 For a given K value (K>0) reverse blocks of K nodes in a list.
 //Recursive version
-var reverseKNodesRecursive = function(head, K) {
+function reverseKNodesRecursive(head, K) {
 	var current = head,
 		next = null,
 		prev = null,
 		count = K;
 	//Reverse K nodes
-	while (current !== null && count > 0) {
-		next = current.next;
-		current.next = prev;
+	while (current && count > 0) {
+		next = current.getNext();
+		current.setNext(prev);
 		prev = current;
 		current = next;
 		count--;
 	}
 	//Now next points to K+1 th node, returns the pointer to the head node
 	if (next !== null) {
-		head.next = reverseKNodesRecursive(next, K);
+		head.setNext(reverseKNodesRecursive(next, K));
 	} //return head node
 	return prev;
 };
 //Iterative version
-var reverseKNodes = function(head, K) {
-	var current = head,
+function reverseKNodes(head, K) {
+	var count, tail, next,
+		current = head,
 		prevTail = null,
 		prevCurrent = head;
-	while (current !== null) {
+	while (current) {
 		//loop for reversing K nodes
-		var count = K,
-			tail = null;
-		while (current !== null && count > 0) {
-			var next = current.next;
-			current.next = tail;
+		count = K;
+		tail = null;
+		while (current && count > 0) {
+			next = current.getNext();
+			current.setNext(tail);
 			tail = current;
 			current = next;
 			count--;
 		}
 		//reversed K Nodes
-		if (prevTail !== null) {
+		if (prevTail) {
 			//Link this set and previous set
-			prevTail.next = tail;
+			prevTail.setNext(tail);
 		} else {
 			//We just reversed first set of K nodes, update head point to the Kth Node
 			head = tail;
@@ -634,30 +694,31 @@ var reverseKNodes = function(head, K) {
 		prevCurrent = current;
 	}
 	return head;
-};
+}
 
 //Problem-41 Josephus Circle: Josephus Problem (or Josephus permutation) is a theoretical problem related to a certain counting-out game.
 //N people have decided to elect a leader by arranging themselves in a circle and eliminating every Mth person around the circle.
 //Assume input is circular linked list with N nodes and each node has a number [1 - N] associated with it. The head node has number 1 as data.
 function getJosephusPosition(N, M) {
-	var i, j, temp, head = new ListNode();
+	var i, j, tmp, temp,
+		head = new ListNode();
 	//Create a circular linked list containing all the players
-	head.data = 1;
+	head.setData(1);
 	temp = head;
 	for (i = 2; i <= N; i++) {
-		var tmp = new ListNode();
-		tmp.data = i;
-		head.next = tmp;
-		head = head.next;
+		tmp = new ListNode();
+		tmp.setData(i);
+		head.setNext(tmp);
+		head = head.getNext();
 	}
-	head.next = temp; //Close circular list by pointing last element to first
-	head = head.next; //Move head position to a node where node.data = 1
+	head.setNext(temp); //Close circular list by pointing last element to first
+	head = head.getNext(); //Move head position to a node where node.data = 1
 	PrintCircularListData(head); //Only to check how many nodes are there
 	for (i = N; i > 1; i--) {
-		for (j = 0; j < M-1; j++) { //Because Mth person is at M-1 distance
-			head = head.next;
+		for (j = 0; j < M - 1; j++) { //Because Mth person is at M-1 distance
+			head = head.getNext();
 		}
-		head.next = head.next.next;
+		head.setNext(head.getNext().getNext());
 	}
-	console.log("Last player left standing is: ", head.data);
+	console.log("Last player left standing is: ", head.getData());
 }

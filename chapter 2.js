@@ -1,6 +1,6 @@
 //2.4 format of a recursive function
 //calulates factorial of a positive integer
-var Fact = function(n) {
+function Fact(n) {
 	//base case: fact of 1
 	if (n === 1) {
 		return 1;
@@ -15,7 +15,7 @@ var Fact = function(n) {
 
 //----------
 //2.5 recursion and memory (virtualization)
-var Print = function(n) {
+function Print(n) {
 	if (n === 0) { //this is the terminating base case
 		return 0;
 	}
