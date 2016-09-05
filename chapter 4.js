@@ -66,7 +66,7 @@ function DynArrayStack(size) {
     };
 }
 
-//Linked list implementation of Stack
+//Linked List
 function ListNode() {
     var data = null,
         next = null;
@@ -88,6 +88,7 @@ function ListNode() {
     };
 }
 
+//Linked list implementation of Stack
 function LLStack() {
     var temp, llNode,
         headNode = new ListNode();
@@ -199,7 +200,7 @@ function postfixEvaluation(postfix) {
 //Problem-5 Infix evaluation using 2 stacks
 function infixEvaluation(infix) {
     var i, bwParnt, eval,
-    	operand1, operand2,
+        operand1, operand2,
         operand = new LLStack(),
         operator = new LLStack();
     for (i = 0; i < infix.length; i++) {
@@ -293,7 +294,7 @@ function advancedStack() {
 //Problem-7 For the Problem-6 is it possible to improve the space complexity?
 function improvedStack() {
     var minTop, elementTop,
-    	elementStack = new LLStack(),
+        elementStack = new LLStack(),
         minStack = new LLStack();
     return {
         pushInImprovedStack: function(data) {
@@ -363,8 +364,8 @@ function isPalindromeUsingStack(inputStr) {
 //----------
 //Problem-11 Given a stack, how to reverse the contents of stacks by using only stack operations (push and pop)?
 function stackReversal() {
-	//private
-	function insertAtBottom(stack, data) {
+    //private
+    function insertAtBottom(stack, data) {
         if (stack.isEmpty()) {
             stack.pushInStack(data);
             return;
@@ -373,15 +374,15 @@ function stackReversal() {
         this.insertAtBottom(stack, data);
         stack.pushInStack(temp);
     }
-	return {
-		//public
-		reverseStack: function(stack) {
-	        if (stack.isEmpty()) return;
-	        var temp = stack.popFromStack();
-	        this.reverseStack(stack);
-	        insertAtBottom(stack, temp);
-	    }
-	};
+    return {
+        //public
+        reverseStack: function(stack) {
+            if (stack.isEmpty()) return;
+            var temp = stack.popFromStack();
+            this.reverseStack(stack);
+            insertAtBottom(stack, temp);
+        }
+    };
 }
 
 //----------
@@ -600,3 +601,48 @@ function arrayWithThreeStack(size) {
         }
     };
 }
+
+//----------
+//Problem-17 Multiple (m) stack in one array: As similar to Problem-15, what if we want to implement m stacks in one array?
+function arrayWithMultipleStack(size, m) {
+    var dataArray = [],
+        base = [],
+        top = [];
+
+    if (size<m) {
+        console.error("Size <"+m+" is not possible");
+        return;
+    }
+
+    return {
+        pushInStack: function(stackId, data) {
+            if (top[i] === base[i+1]) {
+                //Print ith Stack is full and does the shifting
+                //TO-DO
+            } else {
+                dataArray[++top[i]] = data;
+            }
+        },
+
+        popFromStack: function(stackId) {
+            if (top[i] === base[i]) {
+                console.error("Stack is empty");
+                return;
+            }
+            var top = dataArray[top[i]];
+            dataArray[top[i]--] = null;
+            return top;
+        },
+
+        top: function(stackId) {
+            //TO-DO
+        },
+
+        isEmpty: function(stackId) {
+            //TO-DO
+        }
+    };
+}
+
+//Problem-18 Consider an empty stack of integers. Let the numbers 1,2,3,4,5,6 be pushed on to this stack only in the order they appear from left to right.
+//Let S indicates a push and X indicates a pop operation. Can the be permuted in to the order? If so, then give the order string of operation.
