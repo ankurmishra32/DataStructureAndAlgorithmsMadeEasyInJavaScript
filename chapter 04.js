@@ -1,4 +1,4 @@
-/*jslint white: true */
+
 //4.6 Implementation
 //Simple Array Implementation of Stack
 function ArrayStack(size) {
@@ -62,28 +62,6 @@ function DynArrayStack(size) {
                 return;
             }
             return array[top--];
-        }
-    };
-}
-
-//Linked List
-function ListNode() {
-    var data = null,
-        next = null;
-
-    //closure
-    return {
-        setData: function(val) {
-            data = val;
-        },
-        getData: function() {
-            return data;
-        },
-        setNext: function(node) {
-            next = node;
-        },
-        getNext: function() {
-            return next;
         }
     };
 }

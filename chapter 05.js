@@ -113,73 +113,6 @@ function DynArrayQueue (size) {
     }
 }
 
-//Linked List
-function ListNode() {
-    var data = null,
-        next = null;
-
-    //closure
-    return {
-        setData: function(val) {
-            data = val;
-        },
-        getData: function() {
-            return data;
-        },
-        setNext: function(node) {
-            next = node;
-        },
-        getNext: function() {
-            return next;
-        }
-    };
-}
-
-//Linked list implementation of Stack
-function LLStack() {
-    var temp, llNode,
-        headNode = new ListNode();
-
-    return {
-        top: function() {
-            if (!headNode) {
-                return null;
-            }
-            return headNode.getData();
-        },
-        isEmpty: function() {
-            if (!headNode || !headNode.getData())
-                return true;
-            return false;
-        },
-        deleteStack: function() {
-            headNode = null;
-        },
-        pushInStack: function(data) {
-            if (!headNode) {
-                headNode = new ListNode();
-                headNode.setData(data);
-            } else if (!headNode.getData()) {
-                headNode.setData(data);
-            } else {
-                llNode = new ListNode();
-                llNode.setData(data);
-                llNode.setNext(headNode);
-                headNode = llNode;
-            }
-        },
-        popFromStack: function() {
-            if (headNode === null) {
-                console.error("Stack is Empty");
-                return;
-            }
-            temp = headNode.getData();
-            headNode = headNode.getNext();
-            return temp;
-        }
-    };
-}
-
 //Linked List Implementation of Queue
 function LLQueue () {
     var length = 0,
@@ -233,7 +166,6 @@ function QueueReversal (queue) {
 
 //----------
 //Problem-2 How to implement a queue using two stacks?
-
 function QueueWithTwoStacks () {
     var stack1 = new LLStack(),
         stack2 = new LLStack();
