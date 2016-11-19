@@ -1,3 +1,13 @@
+function getMax (array) {
+    var i, max = array[0];
+    for (i=1; i<array.length; i++) {
+        if (max<array[i]) {
+            max = array[i];
+        }
+    }
+    return max;
+}
+
 function swap (array, left, right) {
     var temp = array[left];
     array[left] = array[right];
@@ -170,20 +180,14 @@ function partition(array, low, high) {
 }
 
 //10.15 Counting sort
-function countingSort(array, limit) {
-    var i, max,
+function countingSort(array, limit, exp) {
+    var i,
         temp = [],
         result = [],
         length = array.length;
+    exp = exp || 1;
     if (limit === undefined) {
-        max = array[0];
-        //complexity O(length)
-        for (i=1; i<length; i++) {
-            if (max < array[i]) {
-                max = array[i];
-            }
-        }
-        limit = max + 1;
+        limit = getMax(array) + 1;
     }
     //complexity O(limit)
     for (i=0; i<limit; i++) {
@@ -191,7 +195,9 @@ function countingSort(array, limit) {
     }
     //complexity O(length)
     for (i=0; i<length; i++) {
-        temp[array[i]]++;
+        //temp[array[i]]++;
+        //modified for radix sort
+        temp[(array[i]/exp)%limit]++;
     }
     //complexity O(limit)
     for (i=1; i<limit; i++) {
@@ -199,26 +205,26 @@ function countingSort(array, limit) {
     }
     //complexity O()
     for (i=length-1; i>=0; i--){
-        result[temp[array[i]] - 1] = array[i];
-        temp[array[i]]--;
+        //result[temp[array[i]] - 1] = array[i];
+        //modified for radix sort
+        result[temp[(array[i]/exp)%limit] - 1] = array[i];
+        //temp[array[i]]--;
+        //modified for radix sort
+        temp[(array[i]/exp)%limit]--;
     }
-    return result;
+    //modified array to get the result
+    for (i=0; i<length; i++) {
+        array[i] = result[i];
+    }
 }
 
 //10.16 Bucket sort
 function bucketSort(array, BUCKET) {
-    var i, j, k, max,
+    var i, j, k,
         buckets = [],
         length = array.length;
     if (BUCKET === undefined) {
-        max = array[0];
-        //complexity O(length)
-        for (i=1; i<length; i++) {
-            if (max < array[i]) {
-                max = array[i];
-            }
-        }
-        BUCKET = max + 1;
+        BUCKET = getMax(array) + 1;
     }
     //complexity O(BUCKET)
     for (i=0; i<BUCKET; i++) {
@@ -233,4 +239,117 @@ function bucketSort(array, BUCKET) {
             array[i++] = j;
         }
     }
+}
+
+//10.17 Radix sort
+function radixSort(array) {
+    var exp, max = getMax(array);
+    console.log(max);
+    for (exp=1; Math.floor(max/exp)>0; exp*=10) {
+        countingSort(array, 10, exp);
+    }
+}
+
+//Problem-1 Given an array of n numbers containing repetition of some numbers. Check whether there are repeated elements or not.
+//Assume that we are not allowed to use additional space (but we can use temporary variables, O(1) storage).
+function checkDuplicatesInArray (array) {
+    var i, j,
+        length = array.length;
+    for (i=0; i<length-1; i++) {
+        for (j=i+1; j<length; j++) {
+            if (array[i]===array[j])
+                return true;
+        }
+    }
+    return false;
+}
+
+//Problem-2 Can we improve the time complexity of Problem-1
+//Use Heap-Sort as it have O(n log n) running complexity and use O(1) additional space.
+//We may also use Shell-Sort as it have O(n log^2 n) running time and O(1) additional space complexity.
+function improvedCheckDuplicatesInArray (array) {
+    var i, length = array.length;
+    shellSort(array);
+    for (i=0; i<length-1; i++) {
+        if (array[i] === array[i+1])
+            return true;
+    }
+    return false;
+}
+
+//Problem-3 Given an array, where each element represents a vote in the election. Assume that each vote is given as an integer
+//representation the ID of chosen candidate. Give an algorithm for determining who wins the election.
+function checkWhoWinsTheElection (array) {
+    var i, j, counter,
+        maxCounter = 0,
+        candidate = array[0],
+        length = array.length;
+    for (i=0; i<length; i++) {
+        counter = 0;
+        for (j=i+1; j<length; j++) {
+            if (array[i] === array[j]) {
+                counter++;
+            }
+        }
+        if (counter>maxCounter) {
+            candidate = array[i];
+            maxCounter = counter;
+        }
+    }
+    return candidate;
+}
+
+//Problem-4 Can we improve the complexity of Problem-3
+function improvedCheckWhoWinsTheElection (array) {
+    var i, j,
+        candidate,
+        counter = 0,
+        maxCounter = 0,
+        currentCandidate = array[0],
+        length = array.length;
+    shellSort(array);
+    for (i=1; i<length; i++) {
+        if (array[i] === currentCandidate) {
+            counter++;
+        } else {
+            currentCandidate = array[i];
+            counter = 0;
+        }
+        if (counter>maxCounter) {
+            maxCounter = counter;
+            candidate = currentCandidate;
+        }
+    }
+}
+
+//Problem-5 Can we further improve complexity of Problem-3
+//Use Counting-Sort as no of candidates will be very less compare to votes.
+
+//Problem-9 Let A and B be two arrays and there is a number K.
+//Give an algorithm to determine whether there exist a->A and b->B such that a+b=K in O(n log n) times.
+//For the given problem, we must have Binary search algorith.
+
+//Problem-16 Sort an array of 0's, 1's and 2's.
+//We can use Counting-Sort as it have only 3 elements. Complexity O(n)
+//We can also use Quick-Sort by using 1 as pivot element. This will move all 0's before 1 and all 2's after 1.
+//Hence the complexity of using Quick-Sort become O(n).
+
+//Problem-18 How to find the number which appeared maximum number of times in array?
+function numberAppearedMaximum (array) {
+    var i, number,
+        count = 1, max = 1,
+        length = array.length;
+    quickSort(array);
+    for (i=1; i<length; i++) {
+        if (array[i] === array[i-1]) {
+            count++;
+        } else {
+            if (max<count) {
+                max = count;
+                number = array[i-1];
+            }
+            count = 1;
+        }
+    }
+    console.log("Number:", number, "Count:", max);
 }
