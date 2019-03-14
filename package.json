@@ -2,7 +2,7 @@
   "name": "learn_javascript",
   "version": "1.0.0",
   "description": "\"This will add dependencies related to application\"",
-  "main": "chapter 02.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,12 +16,12 @@
     "url": "https://github.com/ankurmishra32/DataStructureAndAlgorithmsMadeEasyInJavaScript/issues"
   },
   "homepage": "https://github.com/ankurmishra32/DataStructureAndAlgorithmsMadeEasyInJavaScript#readme",
-  "dependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0"
+  "scripts": {
+    "eslint": "eslint --cache --ext .js madeeasy/"
   },
   "devDependencies": {
-    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.12.0"
   }
 }

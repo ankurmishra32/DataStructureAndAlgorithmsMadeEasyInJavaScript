@@ -2,9 +2,9 @@
 // Simple Array Implementation of Stack
 function ArrayStack(size) {
   // private
-  let top = -1,
-    capacity = size,
-    array = [];
+  let top = -1;
+  const capacity = size;
+  const array = [];
   return {
     isEmpty() {
       return (top === -1);
@@ -33,9 +33,9 @@ function ArrayStack(size) {
 // In JavaScript, array is already dynamic in nature
 function DynArrayStack(size) {
   // private
-  let top = -1,
-    capacity = size,
-    array = [];
+  const top = -1;
+  let capacity = size;
+  const array = [];
   return {
     isEmpty() {
       return top === -1;
@@ -67,9 +67,9 @@ function DynArrayStack(size) {
 
 // Linked list implementation of Stack
 function LLStack() {
-  let temp,
-    llNode,
-    headNode = new ListNode();
+  let temp;
+  let llNode;
+  let headNode = new ListNode();
 
   return {
     top() {
@@ -113,15 +113,15 @@ function LLStack() {
 //----------
 // Problem-2 Infix to Postfix conversion using stack
 function infix2postfix(infix) {
-  let i,
-    bwParnt,
-    postfix = '',
-    operator = new LLStack();
+  let i;
+  let bwParnt;
+  let postfix = '';
+  const operator = new LLStack();
   for (i = 0; i < infix.length; i++) {
-    if ((infix.charCodeAt(i) >= 32 && infix.charCodeAt(i) <= 47) ||
-            (infix.charCodeAt(i) >= 58 && infix.charCodeAt(i) <= 64) ||
-            (infix.charCodeAt(i) >= 91 && infix.charCodeAt(i) <= 96) ||
-            (infix.charCodeAt(i) >= 123 && infix.charCodeAt(i) <= 126)) {
+    if ((infix.charCodeAt(i) >= 32 && infix.charCodeAt(i) <= 47)
+            || (infix.charCodeAt(i) >= 58 && infix.charCodeAt(i) <= 64)
+            || (infix.charCodeAt(i) >= 91 && infix.charCodeAt(i) <= 96)
+            || (infix.charCodeAt(i) >= 123 && infix.charCodeAt(i) <= 126)) {
       if (infix[i] === ')') {
         bwParnt = operator.popFromStack();
         while (bwParnt !== '(') {
@@ -144,16 +144,16 @@ function infix2postfix(infix) {
 //----------
 // Problem-4 Postfix evaluation using stack
 function postfixEvaluation(postfix) {
-  let i,
-    operand = new LLStack(),
-    evaluate,
-    operand1,
-    operand2;
+  let i;
+  const operand = new LLStack();
+  let evaluate;
+  let operand1;
+  let operand2;
   for (i = 0; i < postfix.length; i++) {
-    if ((postfix.charCodeAt(i) >= 32 && postfix.charCodeAt(i) <= 47) ||
-            (postfix.charCodeAt(i) >= 58 && postfix.charCodeAt(i) <= 64) ||
-            (postfix.charCodeAt(i) >= 91 && postfix.charCodeAt(i) <= 96) ||
-            (postfix.charCodeAt(i) >= 123 && postfix.charCodeAt(i) <= 126)) {
+    if ((postfix.charCodeAt(i) >= 32 && postfix.charCodeAt(i) <= 47)
+            || (postfix.charCodeAt(i) >= 58 && postfix.charCodeAt(i) <= 64)
+            || (postfix.charCodeAt(i) >= 91 && postfix.charCodeAt(i) <= 96)
+            || (postfix.charCodeAt(i) >= 123 && postfix.charCodeAt(i) <= 126)) {
       operand1 = parseInt(operand.popFromStack(), 10);
       operand2 = parseInt(operand.popFromStack(), 10);
       switch (postfix[i]) {
@@ -181,18 +181,18 @@ function postfixEvaluation(postfix) {
 //----------
 // Problem-5 Infix evaluation using 2 stacks
 function infixEvaluation(infix) {
-  let i,
-    bwParnt,
-    evaluate,
-    operand1,
-    operand2,
-    operand = new LLStack(),
-    operator = new LLStack();
+  let i;
+  let bwParnt;
+  let evaluate;
+  let operand1;
+  let operand2;
+  const operand = new LLStack();
+  const operator = new LLStack();
   for (i = 0; i < infix.length; i++) {
-    if ((infix.charCodeAt(i) >= 32 && infix.charCodeAt(i) <= 47) ||
-            (infix.charCodeAt(i) >= 58 && infix.charCodeAt(i) <= 64) ||
-            (infix.charCodeAt(i) >= 91 && infix.charCodeAt(i) <= 96) ||
-            (infix.charCodeAt(i) >= 123 && infix.charCodeAt(i) <= 126)) {
+    if ((infix.charCodeAt(i) >= 32 && infix.charCodeAt(i) <= 47)
+            || (infix.charCodeAt(i) >= 58 && infix.charCodeAt(i) <= 64)
+            || (infix.charCodeAt(i) >= 91 && infix.charCodeAt(i) <= 96)
+            || (infix.charCodeAt(i) >= 123 && infix.charCodeAt(i) <= 126)) {
       if (infix[i] === ')') {
         bwParnt = oprator.popFromStack();
         while (bwParnt !== '(') {
@@ -247,8 +247,8 @@ function infixEvaluation(infix) {
 //----------
 // Problem-6 How to design a stack such that getMinimum() should be O(1)?
 function advancedStack() {
-  let elementStack = new LLStack(),
-    minStack = new LLStack();
+  const elementStack = new LLStack();
+  const minStack = new LLStack();
   return {
     pushInAdvancedStack(data) {
       elementStack.pushInStack(data);
@@ -278,10 +278,10 @@ function advancedStack() {
 //----------
 // Problem-7 For the Problem-6 is it possible to improve the space complexity?
 function improvedStack() {
-  let minTop,
-    elementTop,
-    elementStack = new LLStack(),
-    minStack = new LLStack();
+  let minTop;
+  let elementTop;
+  const elementStack = new LLStack();
+  const minStack = new LLStack();
   return {
     pushInImprovedStack(data) {
       elementStack.pushInStack(data);
@@ -314,8 +314,8 @@ function improvedStack() {
 // Problem-8 Given an array of characters formed with a's and b's. The string is marked with special character X
 // which represents the middle of the list. Check whether the string is palindrome or not?
 function isPalindrome(inputStr) {
-  let i = 0,
-    j = inputStr.length - 1;
+  let i = 0;
+  let j = inputStr.length - 1;
   while ((i < j) && (inputStr[i] === inputStr[j])) {
     i++;
     j--;
@@ -331,8 +331,8 @@ function isPalindrome(inputStr) {
 //----------
 // Problem-10 Can we solve Problem-8 using stacks?
 function isPalindromeUsingStack(inputStr) {
-  let i = 0,
-    stack = new LLStack();
+  let i = 0;
+  const stack = new LLStack();
   while (inputStr[i] !== 'X') {
     stack.pushInStack(inputStr[i++]);
   }
@@ -376,9 +376,9 @@ function stackReversal() {
 // Problem-14 How do we implement 2 stack using only one array? Our stack routines shoulf not indicate an exception
 // unless every slot in the array is used?
 function arrayWithTwoStack(size) {
-  let dataArray = [],
-    topOne = -1,
-    topTwo = size;
+  const dataArray = [];
+  let topOne = -1;
+  let topTwo = size;
   return {
     pushInStack(stackId, data) {
       if (topTwo === topOne + 1) {
@@ -401,7 +401,7 @@ function arrayWithTwoStack(size) {
         var top = dataArray[topOne];
         dataArray[topOne--] = null;
         return top;
-      } else if (stackId === 2) {
+      } if (stackId === 2) {
         if (topTwo === size) {
           console.error('Second Stack is empty');
           return;
@@ -419,7 +419,7 @@ function arrayWithTwoStack(size) {
           return;
         }
         return dataArray[topOne];
-      } else if (stackId === 2) {
+      } if (stackId === 2) {
         if (topTwo === size) {
           console.error('Second Stack is empty');
           return;
@@ -431,7 +431,7 @@ function arrayWithTwoStack(size) {
     isEmpty(stackId) {
       if (stackId === 1) {
         return topOne === -1;
-      } else if (stackId === size) {
+      } if (stackId === size) {
         return topTwo === size;
       } return null;
     },
@@ -441,11 +441,11 @@ function arrayWithTwoStack(size) {
 //----------
 // Problem-15 How do we implement 3 stack in one array?
 function arrayWithThreeStack(size) {
-  let dataArray = [],
-    topOne = -1,
-    topTwo = size,
-    topThree = size / 2,
-    baseThree = topThree;
+  const dataArray = [];
+  let topOne = -1;
+  let topTwo = size;
+  let topThree = size / 2;
+  let baseThree = topThree;
 
   function stack3IsLeftShiftable() {
     if (topOne + 1 < baseThree) {
@@ -530,7 +530,7 @@ function arrayWithThreeStack(size) {
         var top = dataArray[topOne];
         dataArray[topOne--] = null;
         return top;
-      } else if (stackId === 2) {
+      } if (stackId === 2) {
         if (topTwo === size) {
           console.error('Second Stack is empty');
           return;
@@ -538,7 +538,7 @@ function arrayWithThreeStack(size) {
         var top = dataArray[topTwo];
         dataArray[topTwo++] = null;
         return top;
-      } else if (stackId === 3) {
+      } if (stackId === 3) {
         if (topThree === size && dataArray[topThree] === null) {
           console.error('Third Stack is empty');
           return;
@@ -561,13 +561,13 @@ function arrayWithThreeStack(size) {
           return;
         }
         return dataArray[topOne];
-      } else if (stackId === 2) {
+      } if (stackId === 2) {
         if (topTwo === size) {
           console.error('Second Stack is empty');
           return;
         }
         return dataArray[topTwo];
-      } else if (stackId === 3) {
+      } if (stackId === 3) {
         if (topThree === baseThree && dataArray[baseThree] === null) {
           console.error('Third Stack is empty');
           return;
@@ -579,9 +579,9 @@ function arrayWithThreeStack(size) {
     isEmpty(stackId) {
       if (stackId === 1) {
         return topOne === -1;
-      } else if (stackId === size) {
+      } if (stackId === size) {
         return topTwo === size;
-      } else if (stackId === 3) {
+      } if (stackId === 3) {
         return (topThree === baseThree && dataArray[baseThree] === null);
       } return null;
     },
@@ -591,9 +591,9 @@ function arrayWithThreeStack(size) {
 //----------
 // Problem-17 Multiple (m) stack in one array: As similar to Problem-15, what if we want to implement m stacks in one array?
 function arrayWithMultipleStack(size, m) {
-  let dataArray = [],
-    base = [],
-    top = [];
+  const dataArray = [];
+  const base = [];
+  const top = [];
 
   if (size < m) {
     console.error(`Size <${m} is not possible`);

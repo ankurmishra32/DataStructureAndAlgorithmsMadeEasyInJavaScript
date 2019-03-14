@@ -3,8 +3,8 @@
 // Unordered linear search
 function unorderedLinearSearch(array, item) {
   // will return either array index where item is located or -1 for not found
-  let i,
-    length = array.length;
+  let i;
+  const { length } = array;
   for (i = 0; i < length; i++) {
     if (array[i] === item) {
       return i;
@@ -16,12 +16,12 @@ function unorderedLinearSearch(array, item) {
 // Ordered linear search
 function orderedLinearSearch(array, item) {
   // will return either array index where item is located or -1 for not found
-  let i,
-    length = array.length;
+  let i;
+  const { length } = array;
   for (i = 0; i < length; i++) {
     if (array[i] === item) {
       return i;
-    } else if (array[i] > item) {
+    } if (array[i] > item) {
       // just improved the not found senario
       // running time is almost same as of previous algo
       return -1;
@@ -32,14 +32,14 @@ function orderedLinearSearch(array, item) {
 
 // Binary search iterative version
 function binarySearchIterative(array, item) {
-  let low = 0,
-    mid,
-    high = array.length - 1;
+  let low = 0;
+  let mid;
+  let high = array.length - 1;
   while (low <= high) {
     mid = low + Math.floor((high - low) / 2);
     if (array[mid] === item) {
       return mid;
-    } else if (array[mid] < item) {
+    } if (array[mid] < item) {
       low = mid + 1;
     } else {
       high = mid - 1;
@@ -59,7 +59,7 @@ function binarySearchRecursive(array, item, low, high) {
   mid = low + Math.floor((high - low) / 2);
   if (array[mid] === item) {
     return mid;
-  } else if (array[mid] < item) {
+  } if (array[mid] < item) {
     binarySearchRecursive(array, item, mid + 1, high);
   } else {
     binarySearchRecursive(array, item, low, mid - 1);
@@ -71,8 +71,8 @@ function binarySearchRecursive(array, item, low, high) {
 
 // Problem-4 Can we improve the complexity of problem-1 solution? Assume that array have all +ve numbers and all numbers are from rangle [0, n-1]
 function checkDuplicatesInArrayWithAsssumptionOfValues(array) {
-  let i,
-    length = array.length;
+  let i;
+  const { length } = array;
   for (i = 0; i < length - 1; i++) {
     if (array[Math.abs(array[i])] < 0) {
       return true;
@@ -87,10 +87,10 @@ function checkDuplicatesInArrayWithAsssumptionOfValues(array) {
 
 // Problem-8 For Problem-5 solution, can we improve the time complexity? Assume that array have all numbers are from rangle [0, n-1]
 function maxRepetitionsWithAsssumptionOfValues(array) {
-  let i = 0,
-    max = 0,
-    maxIndex = 0,
-    length = array.length;
+  let i = 0;
+  let max = 0;
+  let maxIndex = 0;
+  const { length } = array;
   for (i = 0; i < length; i++) {
     array[array[i] % length] += length;
   }
@@ -106,9 +106,9 @@ function maxRepetitionsWithAsssumptionOfValues(array) {
 // Problem-9 Given the array of n numbers, give an algorithm to find first element in the array which is repeated.
 // Brute-force method
 function firstRepeatBruteForce(array) {
-  let i,
-    j,
-    length = array.length;
+  let i;
+  let j;
+  const { length } = array;
   for (i = 0; i < length - 1; i++) {
     for (j = i + 1; j < length; j++) {
       if (array[i] === array[j]) {
@@ -128,10 +128,10 @@ function firstRepeatBruteForce(array) {
 // There are no duplicates in the list. One of the number is missing. Give an algo to find that missing number.
 // Brute-force method
 function findMissingNumberBruteForse(array, limit) {
-  let i,
-    j,
-    found,
-    length = array.length;
+  let i;
+  let j;
+  let found;
+  const { length } = array;
   if (limit === undefined) {
     limit = getMax(array);
   }
@@ -151,8 +151,8 @@ function findMissingNumberBruteForse(array, limit) {
 
 // Problem-14 For Problem-13, can we use sorting technique?
 function findMissingNumberUsingSorting(array, limit) {
-  let i,
-    length = array.length;
+  let i;
+  const { length } = array;
   if (limit === undefined) {
     limit = getMax(array);
   }
@@ -168,10 +168,10 @@ function findMissingNumberUsingSorting(array, limit) {
 
 // Problem-16 For Problem-13, can we improve the complexity?
 function improvedFindMissingNumber(array, limit) {
-  let i,
-    numb,
-    sum = 0,
-    length = array.length;
+  let i;
+  let numb;
+  let sum = 0;
+  const { length } = array;
   if (limit === undefined) {
     limit = getMax(array);
   }
@@ -187,10 +187,10 @@ function improvedFindMissingNumber(array, limit) {
 // overflow and may not get correct answer. How can we solve the problem?
 // Sol: There is no integer in javascript but just number. However the solution of XOR is the anwser and still work here.
 function findMissingNumberUsingXOR(array, limit) {
-  let i,
-    X,
-    Y,
-    length = array.length;
+  let i;
+  let X;
+  let Y;
+  const { length } = array;
   if (limit === undefined) {
     limit = getMax(array);
   }
@@ -206,9 +206,9 @@ function findMissingNumberUsingXOR(array, limit) {
 // Problem-18 Find the number occuring odd number of times. Given an array of positive integers, all numbers occurs even
 // numbers of times except one number which occure odd number of times. Find the number in O(n) time and constant space.
 function findNumberOccurOddTimesUsingXOR(array) {
-  let i,
-    X,
-    length = array.length;
+  let i;
+  let X;
+  const { length } = array;
   for (i = 0; i < length; i++) {
     X ^= array[i];
   }
@@ -218,8 +218,8 @@ function findNumberOccurOddTimesUsingXOR(array) {
 // Problem-19 Find the two repeating elements in a given array: Given an array with n+2 elements, all elements of the array
 // are in range 1 to n and also only once except two numbers which occurs twice. Find those two numbers.
 function printRepeatedElementsUsingBruteForce(array, n) {
-  let i,
-    j;
+  let i;
+  let j;
   for (i = 0; i < n + 1; i++) {
     for (j = i + 1; j < n + 2; j++) {
       if (array[i] === array[j]) {
@@ -243,8 +243,8 @@ function printRepeatedElementsUsingSorting(array, n) {
 
 // Problem-21 For the Problem-19, can we improve the time complexity using counting
 function printRepeatedElementUsingCounting(array, n) {
-  let i,
-    count = [];
+  let i;
+  const count = [];
   for (i = 0; i < n; i++) {
     count[i] = 0;
   }
@@ -258,11 +258,11 @@ function printRepeatedElementUsingCounting(array, n) {
 
 // Problem-22 For the Problem-19, can we improve the time complexity using XOR operation
 function printRepeatedElementsUsingXOR(array, n) {
-  let i,
-    right_most,
-    X = 0,
-    Y = 0,
-    XOR = array[0];
+  let i;
+  let right_most;
+  let X = 0;
+  let Y = 0;
+  let XOR = array[0];
   for (i = 1; i < n + 2; i++) {
     XOR ^= array[i]; // Compute XOR of all elements in array
   }
@@ -292,10 +292,10 @@ function printRepeatedElementsUsingXOR(array, n) {
 
 // Problem-23 For the Problem-19, is there yet another way of solving the problem
 function printRepeatedElementsUsingSP(array, n) {
-  let i,
-    D,
-    S = 0,
-    P = 1; // Dfor difference, S for sum and P for product
+  let i;
+  let D;
+  let S = 0;
+  let P = 1; // Dfor difference, S for sum and P for product
   for (i = 0; i < n + 2; i++) {
     S += array[i];
     P *= array[i];

@@ -1,6 +1,6 @@
 function getMax(array) {
-  let i,
-    max = array[0];
+  let i;
+  let max = array[0];
   for (i = 1; i < array.length; i++) {
     if (max < array[i]) {
       max = array[i];
@@ -17,9 +17,9 @@ function swap(array, left, right) {
 
 // 10.5 Bubble sort
 function bubbleSort(array) {
-  let i,
-    pass,
-    length = array.length;
+  let i;
+  let pass;
+  const { length } = array;
   for (pass = length - 1; pass >= 0; pass--) {
     for (i = 0; i < pass; i++) {
       if (array[i] > array[i + 1]) {
@@ -32,10 +32,10 @@ function bubbleSort(array) {
 // Above algorithm takes O(n^2) even in best case. We can improve it using an extra flag
 // The only case where we can skip the remaining pass if array is already sorted. Best case O(n).
 function bubbleSortImproved(array) {
-  let i,
-    pass,
-    swapped = 1,
-    length = array.length;
+  let i;
+  let pass;
+  let swapped = 1;
+  const { length } = array;
   for (pass = length - 1; pass >= 0 && swapped; pass--) {
     swapped = 0;
     for (i = 0; i < pass; i++) {
@@ -49,10 +49,10 @@ function bubbleSortImproved(array) {
 
 // 10.6 Selection sort
 function selectionSort(array) {
-  let i,
-    pass,
-    min,
-    length = array.length;
+  let i;
+  let pass;
+  let min;
+  const { length } = array;
   for (pass = 0; pass < length - 1; pass++) {
     min = pass;
     for (i = pass + 1; i < length; i++) {
@@ -66,10 +66,10 @@ function selectionSort(array) {
 
 // 10.7 Insertion sort
 function insertionSort(array) {
-  let temp,
-    pass,
-    i,
-    length = array.length;
+  let temp;
+  let pass;
+  let i;
+  const { length } = array;
   for (pass = 1; pass < length; pass++) {
     temp = array[pass];
     i = pass - 1;
@@ -83,11 +83,11 @@ function insertionSort(array) {
 
 // 10.8 Shell sort
 function shellSort(array) {
-  let temp,
-    pass,
-    gap,
-    i,
-    length = array.length;
+  let temp;
+  let pass;
+  let gap;
+  let i;
+  const { length } = array;
   for (gap = Math.floor(length / 2); gap > 0; gap = Math.floor(gap / 2)) {
     // Modified Insersion Sort
     for (pass = gap; pass < length; pass++) {
@@ -104,11 +104,11 @@ function shellSort(array) {
 
 // Shell sort as per the Karumanchi book version
 function shellSortByKarumanchi(array) {
-  let i,
-    j,
-    h,
-    v,
-    length = array.length;
+  let i;
+  let j;
+  let h;
+  let v;
+  const { length } = array;
   for (h = 1; h < length / 9; h = 3 * h + 1);
   for (; h > 0; h = Math.floor(h / 3)) {
     for (i = h + 1; i < length; i++) {
@@ -139,10 +139,10 @@ function mergeSort(array, temp, left, right) {
 }
 
 function merge(array, temp, left, mid, right) {
-  let i,
-    left_end = mid - 1,
-    temp_pos = left,
-    size = right - left + 1;
+  let i;
+  const left_end = mid - 1;
+  let temp_pos = left;
+  const size = right - left + 1;
   while ((left <= left_end) && (mid <= right)) {
     if (array[left] <= array[mid]) {
       temp[temp_pos++] = array[left++];
@@ -175,9 +175,9 @@ function quickSort(array, low, high) {
 }
 
 function partition(array, low, high) {
-  let left = low,
-    right = high,
-    pivot_item = array[low];
+  let left = low;
+  let right = high;
+  const pivot_item = array[low];
   while (left < right) {
     while (array[left] <= pivot_item) {
       left++;
@@ -196,10 +196,10 @@ function partition(array, low, high) {
 
 // 10.15 Counting sort
 function countingSort(array, limit, exp) {
-  let i,
-    temp = [],
-    result = [],
-    length = array.length;
+  let i;
+  const temp = [];
+  const result = [];
+  const { length } = array;
   exp = exp || 1;
   if (limit === undefined) {
     limit = getMax(array) + 1;
@@ -235,11 +235,11 @@ function countingSort(array, limit, exp) {
 
 // 10.16 Bucket sort
 function bucketSort(array, BUCKET) {
-  let i,
-    j,
-    k,
-    buckets = [],
-    length = array.length;
+  let i;
+  let j;
+  let k;
+  const buckets = [];
+  const { length } = array;
   if (BUCKET === undefined) {
     BUCKET = getMax(array) + 1;
   }
@@ -260,8 +260,8 @@ function bucketSort(array, BUCKET) {
 
 // 10.17 Radix sort
 function radixSort(array) {
-  let exp,
-    max = getMax(array);
+  let exp;
+  const max = getMax(array);
   console.log(max);
   for (exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
     countingSort(array, 10, exp);
@@ -271,9 +271,9 @@ function radixSort(array) {
 // Problem-1 Given an array of n numbers containing repetition of some numbers. Check whether there are repeated elements or not.
 // Assume that we are not allowed to use additional space (but we can use temporary variables, O(1) storage).
 function checkDuplicatesInArray(array) {
-  let i,
-    j,
-    length = array.length;
+  let i;
+  let j;
+  const { length } = array;
   for (i = 0; i < length - 1; i++) {
     for (j = i + 1; j < length; j++) {
       if (array[i] === array[j]) { return true; }
@@ -286,8 +286,8 @@ function checkDuplicatesInArray(array) {
 // Use Heap-Sort as it have O(n log n) running complexity and use O(1) additional space.
 // We may also use Shell-Sort as it have O(n log^2 n) running time and O(1) additional space complexity.
 function improvedCheckDuplicatesInArray(array) {
-  let i,
-    length = array.length;
+  let i;
+  const { length } = array;
   shellSort(array);
   for (i = 0; i < length - 1; i++) {
     if (array[i] === array[i + 1]) { return true; }
@@ -298,12 +298,12 @@ function improvedCheckDuplicatesInArray(array) {
 // Problem-3 Given an array, where each element represents a vote in the election. Assume that each vote is given as an integer
 // representation the ID of chosen candidate. Give an algorithm for determining who wins the election.
 function checkWhoWinsTheElection(array) {
-  let i,
-    j,
-    counter,
-    maxCounter = 0,
-    candidate = array[0],
-    length = array.length;
+  let i;
+  let j;
+  let counter;
+  let maxCounter = 0;
+  let candidate = array[0];
+  const { length } = array;
   for (i = 0; i < length; i++) {
     counter = 0;
     for (j = i + 1; j < length; j++) {
@@ -321,13 +321,13 @@ function checkWhoWinsTheElection(array) {
 
 // Problem-4 Can we improve the complexity of Problem-3
 function improvedCheckWhoWinsTheElection(array) {
-  let i,
-    j,
-    candidate,
-    counter = 0,
-    maxCounter = 0,
-    currentCandidate = array[0],
-    length = array.length;
+  let i;
+  let j;
+  let candidate;
+  let counter = 0;
+  let maxCounter = 0;
+  let currentCandidate = array[0];
+  const { length } = array;
   shellSort(array);
   for (i = 1; i < length; i++) {
     if (array[i] === currentCandidate) {
@@ -357,11 +357,11 @@ function improvedCheckWhoWinsTheElection(array) {
 
 // Problem-18 How to find the number which appeared maximum number of times in array?
 function numberAppearedMaximum(array) {
-  let i,
-    number,
-    count = 1,
-    max = 1,
-    length = array.length;
+  let i;
+  let number;
+  let count = 1;
+  let max = 1;
+  const { length } = array;
   quickSort(array);
   for (i = 1; i < length; i++) {
     if (array[i] === array[i - 1]) {

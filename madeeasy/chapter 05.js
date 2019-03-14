@@ -2,11 +2,11 @@
 // Simple Circular Array Implementation of Queue
 function ArrayQueue(size) {
   // private
-  let front = -1,
-    rear = -1,
-    capacity = size,
-    array = [];
-    // closure
+  let front = -1;
+  let rear = -1;
+  const capacity = size;
+  const array = [];
+  // closure
   return {
     isEmpty() {
       return (front === -1);
@@ -50,11 +50,11 @@ function ArrayQueue(size) {
 // Dynamic Circular Array Implementation of Queue
 function DynArrayQueue(size) {
   // private
-  let front = -1,
-    rear = -1,
-    capacity = size,
-    array = [];
-    // closure
+  let front = -1;
+  let rear = -1;
+  let capacity = size;
+  const array = [];
+  // closure
   return {
     isEmpty() {
       return (front === -1);
@@ -115,9 +115,9 @@ function DynArrayQueue(size) {
 
 // Linked List Implementation of Queue
 function LLQueue() {
-  let length = 0,
-    frontNode = null,
-    rearNode = null;
+  let length = 0;
+  let frontNode = null;
+  let rearNode = null;
   return {
     isEmpty() {
       return (frontNode === null);
@@ -167,8 +167,8 @@ function QueueReversal(queue) {
 //----------
 // Problem-2 How to implement a queue using two stacks?
 function QueueWithTwoStacks() {
-  let stack1 = new LLStack(),
-    stack2 = new LLStack();
+  const stack1 = new LLStack();
+  const stack2 = new LLStack();
 
   return {
     isEmpty() {
@@ -195,8 +195,8 @@ function QueueWithTwoStacks() {
 //----------
 // Problem-3 Show how to efficiently implement one stack using two queues.
 function StackWithTwoQueues() {
-  let queue1 = new LLQueue(),
-    queue2 = new LLQueue();
+  const queue1 = new LLQueue();
+  const queue2 = new LLQueue();
 
   return {
     pushInStack(data) {
@@ -207,8 +207,8 @@ function StackWithTwoQueues() {
       }
     },
     popFromStack() {
-      let i = 0,
-        size;
+      let i = 0;
+      let size;
       if (queue2.isEmpty()) {
         size = queue1.getQueueSize();
         while (i++ < size - 1) {
