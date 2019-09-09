@@ -4,7 +4,7 @@
   "description": "\"This will add dependencies related to application\"",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint": "eslint --cache --ext .js madeeasy/"
   },
   "repository": {
     "type": "git",
@@ -16,12 +16,9 @@
     "url": "https://github.com/ankurmishra32/DataStructureAndAlgorithmsMadeEasyInJavaScript/issues"
   },
   "homepage": "https://github.com/ankurmishra32/DataStructureAndAlgorithmsMadeEasyInJavaScript#readme",
-  "scripts": {
-    "eslint": "eslint --cache --ext .js madeeasy/"
-  },
   "devDependencies": {
-    "eslint": "^5.15.1",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.12.0"
   }
 }

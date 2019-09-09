@@ -34,7 +34,6 @@ function ListLength(headNode) {
 
 // Inserting a node in Singly Linked List
 function InsertInLinkedList(headNode, nodeToInsert, position) {
-  let size;
   let count = 1;
   let previousNode;
   let currentNode;
@@ -42,7 +41,7 @@ function InsertInLinkedList(headNode, nodeToInsert, position) {
     headNode = nodeToInsert;
     return;
   }
-  size = ListLength(headNode);
+  const size = ListLength(headNode);
   if (position > size + 1 || position < 1) {
     console.error(`Position of node to insert is invalid. The valid inputs are 1 to ${size + 1}`);
     return;
@@ -130,15 +129,13 @@ function DLLNode() {
 
 // Inserting a node in Doubly Linked List
 function DLLInsert(headNode, nodeToInsert, position) {
-  let size;
   let count = 1;
   let previousNode;
-  let currentNode;
   if (!headNode || !headNode.getData()) { // inserting at the beginning when no LinkList present
     headNode = nodeToInsert;
     return;
   }
-  size = ListLength(headNode);
+  const size = ListLength(headNode);
   if (position > size + 1 || position < 1) {
     console.error(`Position of node to insert is invalid. The valid inputs are 1 to ${size + 1}`);
     return;
@@ -154,7 +151,7 @@ function DLLInsert(headNode, nodeToInsert, position) {
     previousNode = previousNode.getNext();
     count++;
   }
-  currentNode = previousNode.getNext();
+  const currentNode = previousNode.getNext();
   nodeToInsert.setNext(currentNode);
   if (currentNode) {
     currentNode.setPrevious(nodeToInsert);
@@ -166,7 +163,6 @@ function DLLInsert(headNode, nodeToInsert, position) {
 // Deleting a node in Doubly Linked List
 function DLLDelete(headNode, position) {
   let count = 1;
-  let laterNode;
   let previousNode;
   let currentNode = new ListNode();
   const size = ListLength(headNode);
@@ -186,7 +182,7 @@ function DLLDelete(headNode, position) {
     count++;
   }
   currentNode = previousNode.getNext();
-  laterNode = currentNode.getNext();
+  const laterNode = currentNode.getNext();
   previousNode.setNext(laterNode);
   if (laterNode) {
     laterNode.setPrevious(previousNode);
@@ -527,14 +523,13 @@ function findMiddleBruteForce(headNode) {
 // Problem-25 Can we improve the complexity of Problem-24?
 // By finding length
 function findMiddleByLength(headNode) {
-  let middle;
   let length = 0;
   let temp = headNode;
   while (headNode) {
     headNode = headNode.getNext();
     length++;
   }
-  middle = parseInt((length / 2), 10);
+  const middle = parseInt((length / 2), 10);
   length = 0;
   while (length !== middle) {
     temp = temp.getNext();
