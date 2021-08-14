@@ -1,3 +1,6 @@
+import { ListNode } from './chapter 03';
+import { LLStack } from './chapter 04';
+
 // 5.6 Implementation
 // Simple Circular Array Implementation of Queue
 function ArrayQueue(size) {
@@ -29,12 +32,11 @@ function ArrayQueue(size) {
       }
     },
     deQueue() {
-      let data;
       if (this.isEmpty()) {
         console.error('Queue Empty');
         return;
       }
-      data = array[front];
+      const data = array[front];
       if (front === rear) {
         // when only one element left in queue
         front = -1;
@@ -63,7 +65,7 @@ function DynArrayQueue(size) {
       return ((rear + 1) % capacity === front);
     },
     getQueueSize() {
-      let size = (capacity - front + rear + 1) % capacity;
+      size = (capacity - front + rear + 1) % capacity;
       /** Size will be zero when the queue get's full
              * This time we have to double the size of array
              * Hence the remaining size is equal to capacity
@@ -95,12 +97,11 @@ function DynArrayQueue(size) {
       }
     },
     deQueue() {
-      let data;
       if (this.isEmpty()) {
         console.error('Queue Empty');
         return;
       }
-      data = array[front];
+      const data = array[front];
       if (front === rear) {
         // when only one element left in queue
         front = -1;
@@ -135,12 +136,11 @@ function LLQueue() {
       length++;
     },
     deQueue() {
-      let data;
       if (this.isEmpty()) {
         console.error('Queue Empty');
         return;
       }
-      data = frontNode.getData();
+      const data = frontNode.getData();
       frontNode = frontNode.getNext();
       length--;
       return data;

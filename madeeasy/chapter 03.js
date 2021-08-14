@@ -36,7 +36,6 @@ function ListLength(headNode) {
 function InsertInLinkedList(headNode, nodeToInsert, position) {
   let count = 1;
   let previousNode;
-  let currentNode;
   if (!headNode || !headNode.getData()) { // inserting at the beginning when no LinkList present
     headNode = nodeToInsert;
     return;
@@ -56,7 +55,7 @@ function InsertInLinkedList(headNode, nodeToInsert, position) {
     previousNode = previousNode.getNext();
     count++;
   }
-  currentNode = previousNode.getNext();
+  const currentNode = previousNode.getNext();
   nodeToInsert.setNext(currentNode);
   previousNode.setNext(nodeToInsert);
 }
@@ -518,6 +517,7 @@ function findMiddleBruteForce(headNode) {
     headNode = headNode.getNext();
     count2 = 0;
   }
+  return null;
 }
 
 // Problem-25 Can we improve the complexity of Problem-24?
@@ -599,11 +599,10 @@ function reversePairRecursive(head) {
 
 // Iterative version
 function reversePairIterative(head) {
-  let temp;
   let prev;
   let curr;
   let tmp;
-  temp = new ListNode();
+  const temp = new ListNode();
   temp.setNext(head);
   prev = temp;
   curr = head;
@@ -710,11 +709,10 @@ function getJosephusPosition(N, M) {
   let i;
   let j;
   let tmp;
-  let temp;
   let head = new ListNode();
   // Create a circular linked list containing all the players
   head.setData(1);
-  temp = head;
+  const temp = head;
   for (i = 2; i <= N; i++) {
     tmp = new ListNode();
     tmp.setData(i);
@@ -732,3 +730,5 @@ function getJosephusPosition(N, M) {
   }
   console.log('Last player left standing is: ', head.getData());
 }
+
+export default { ListNode };
