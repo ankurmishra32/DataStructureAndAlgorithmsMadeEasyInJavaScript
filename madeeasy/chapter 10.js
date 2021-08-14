@@ -124,6 +124,30 @@ function shellSortByKarumanchi(array) {
 }
 
 // 10.9 Merge sort
+function merge(array, temp, left, mid, right) {
+  let i;
+  const leftEnd = mid - 1;
+  let tempPos = left;
+  const size = right - left + 1;
+  while ((left <= leftEnd) && (mid <= right)) {
+    if (array[left] <= array[mid]) {
+      temp[tempPos++] = array[left++];
+    } else {
+      temp[tempPos++] = array[mid++];
+    }
+  }
+  while (left <= leftEnd) {
+    temp[tempPos++] = array[left++];
+  }
+  while (mid <= right) {
+    temp[tempPos++] = array[mid++];
+  }
+  for (i = 0; i <= size; i++) {
+    array[right] = temp[right];
+    right--;
+  }
+}
+
 function mergeSort(array, temp, left, right) {
   let mid;
   temp = (temp === undefined) ? [] : temp;
@@ -138,31 +162,27 @@ function mergeSort(array, temp, left, right) {
   }
 }
 
-function merge(array, temp, left, mid, right) {
-  let i;
-  const left_end = mid - 1;
-  let temp_pos = left;
-  const size = right - left + 1;
-  while ((left <= left_end) && (mid <= right)) {
-    if (array[left] <= array[mid]) {
-      temp[temp_pos++] = array[left++];
-    } else {
-      temp[temp_pos++] = array[mid++];
+// 10.11 Quicksort
+function partition(array, low, high) {
+  let left = low;
+  let right = high;
+  const pivotItem = array[low];
+  while (left < right) {
+    while (array[left] <= pivotItem) {
+      left++;
+    }
+    while (array[right] > pivotItem) {
+      right--;
+    }
+    if (left < right) {
+      swap(array, left, right);
     }
   }
-  while (left <= left_end) {
-    temp[temp_pos++] = array[left++];
-  }
-  while (mid <= right) {
-    temp[temp_pos++] = array[mid++];
-  }
-  for (i = 0; i <= size; i++) {
-    array[right] = temp[right];
-    right--;
-  }
+  array[low] = array[right];
+  array[right] = pivotItem;
+  return right;
 }
 
-// 10.11 Quicksort
 function quickSort(array, low, high) {
   let pivot;
   low = (low === undefined) ? 0 : low;
@@ -172,26 +192,6 @@ function quickSort(array, low, high) {
     quickSort(array, low, pivot - 1);
     quickSort(array, pivot + 1, high);
   }
-}
-
-function partition(array, low, high) {
-  let left = low;
-  let right = high;
-  const pivot_item = array[low];
-  while (left < right) {
-    while (array[left] <= pivot_item) {
-      left++;
-    }
-    while (array[right] > pivot_item) {
-      right--;
-    }
-    if (left < right) {
-      swap(array, left, right);
-    }
-  }
-  array[low] = array[right];
-  array[right] = pivot_item;
-  return right;
 }
 
 // 10.15 Counting sort
@@ -376,3 +376,5 @@ function numberAppearedMaximum(array) {
   }
   console.log('Number:', number, 'Count:', max);
 }
+
+export default { getMax, bucketSort };

@@ -67,3 +67,5 @@ function kString(n, k) {
     }
   }
 }
+
+export default { Fact };

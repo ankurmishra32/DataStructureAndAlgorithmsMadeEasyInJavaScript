@@ -1,3 +1,6 @@
+import { Fact } from './chapter 02';
+import { getMax, bucketSort } from './chapter 10';
+
 // 11.3 Types of Searching
 
 // Unordered linear search
@@ -50,13 +53,12 @@ function binarySearchIterative(array, item) {
 
 // Binary search recursive version
 function binarySearchRecursive(array, item, low, high) {
-  let mid;
   low = (low === undefined) ? 0 : low;
   high = (high === undefined) ? (array.length - 1) : high;
   if (low > high) {
     return -1;
   }
-  mid = low + Math.floor((high - low) / 2);
+  const mid = low + Math.floor((high - low) / 2);
   if (array[mid] === item) {
     return mid;
   } if (array[mid] < item) {
@@ -169,7 +171,6 @@ function findMissingNumberUsingSorting(array, limit) {
 // Problem-16 For Problem-13, can we improve the complexity?
 function improvedFindMissingNumber(array, limit) {
   let i;
-  let numb;
   let sum = 0;
   const { length } = array;
   if (limit === undefined) {
@@ -179,7 +180,7 @@ function improvedFindMissingNumber(array, limit) {
   for (i = 0; i < length; i++) {
     sum += array[i];
   }
-  numb = (limit * (limit + 1)) / 2 - sum;
+  const numb = (limit * (limit + 1)) / 2 - sum;
   return numb || -1;
 }
 
@@ -259,7 +260,6 @@ function printRepeatedElementUsingCounting(array, n) {
 // Problem-22 For the Problem-19, can we improve the time complexity using XOR operation
 function printRepeatedElementsUsingXOR(array, n) {
   let i;
-  let right_most;
   let X = 0;
   let Y = 0;
   let XOR = array[0];
@@ -269,11 +269,11 @@ function printRepeatedElementsUsingXOR(array, n) {
   for (i = 1; i <= n; i++) {
     XOR ^= i; // Compute XOR of all elements from 1 to n
   }
-  right_most = XOR & ~(XOR - 1); // Get the rightmost set bit in right_most
+  const rightMost = XOR & ~(XOR - 1); // Get the rightmost set bit in rightMost
 
   // Now divide elements in two sets by comparing rightmost set
   for (i = 0; i < n + 2; i++) {
-    if (array[i] & right_most) {
+    if (array[i] & rightMost) {
       X ^= array[i]; // XOR of first set in array
     } else {
       Y ^= array[i]; // XOR of second set in array
@@ -281,7 +281,7 @@ function printRepeatedElementsUsingXOR(array, n) {
   }
 
   for (i = 1; i <= n; i++) {
-    if (i & right_most) {
+    if (i & rightMost) {
       X ^= i; // XOR of first set in array and {1,2,..,n}
     } else {
       Y ^= i; // XOR of second set in array and {1,2,..,n}
@@ -293,7 +293,6 @@ function printRepeatedElementsUsingXOR(array, n) {
 // Problem-23 For the Problem-19, is there yet another way of solving the problem
 function printRepeatedElementsUsingSP(array, n) {
   let i;
-  let D;
   let S = 0;
   let P = 1; // Dfor difference, S for sum and P for product
   for (i = 0; i < n + 2; i++) {
@@ -302,7 +301,7 @@ function printRepeatedElementsUsingSP(array, n) {
   }
   S -= (n * (n + 1) / 2);
   P /= Fact(n);
-  D = Math.sqrt(S * S - 4 * P);
+  const D = Math.sqrt(S * S - 4 * P);
 
   console.log((S - D) / 2, (S + D) / 2);
 }
