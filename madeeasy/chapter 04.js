@@ -1,3 +1,4 @@
+import { ListNode } from './chapter 03';
 // 4.6 Implementation
 // Simple Array Implementation of Stack
 function ArrayStack(size) {
@@ -33,7 +34,7 @@ function ArrayStack(size) {
 // In JavaScript, array is already dynamic in nature
 function DynArrayStack(size) {
   // private
-  const top = -1;
+  let top = -1;
   let capacity = size;
   const array = [];
   return {
@@ -169,6 +170,9 @@ function postfixEvaluation(postfix) {
         case '/':
           evaluate = operand2 / operand1;
           break;
+        default:
+          console.error("Doesn't support oprand other then +, -, *, / ");
+          break;
       }
       operand.pushInStack(evaluate);
     } else {
@@ -194,7 +198,7 @@ function infixEvaluation(infix) {
             || (infix.charCodeAt(i) >= 91 && infix.charCodeAt(i) <= 96)
             || (infix.charCodeAt(i) >= 123 && infix.charCodeAt(i) <= 126)) {
       if (infix[i] === ')') {
-        bwParnt = oprator.popFromStack();
+        bwParnt = operator.popFromStack();
         while (bwParnt !== '(') {
           operand1 = parseInt(operand.popFromStack(), 10);
           operand2 = parseInt(operand.popFromStack(), 10);
@@ -210,6 +214,9 @@ function infixEvaluation(infix) {
               break;
             case '/':
               evaluate = operand2 / operand1;
+              break;
+            default:
+              console.error("Doesn't support oprand other then +, -, *, / ");
               break;
           }
           operand.pushInStack(evaluate);
@@ -237,6 +244,9 @@ function infixEvaluation(infix) {
         break;
       case '/':
         evaluate = operand2 / operand1;
+        break;
+      default:
+        console.error("Doesn't support oprand other then +, -, *, / ");
         break;
     }
     operand.pushInStack(evaluate);
@@ -389,7 +399,7 @@ function arrayWithTwoStack(size) {
         dataArray[++topOne] = data;
       } else if (stackId === 2) {
         dataArray[--topTwo] = data;
-      } else return;
+      }
     },
 
     popFromStack(stackId) {
@@ -398,7 +408,7 @@ function arrayWithTwoStack(size) {
           console.error('First Stack is empty');
           return;
         }
-        var top = dataArray[topOne];
+        const top = dataArray[topOne];
         dataArray[topOne--] = null;
         return top;
       } if (stackId === 2) {
@@ -406,7 +416,7 @@ function arrayWithTwoStack(size) {
           console.error('Second Stack is empty');
           return;
         }
-        var top = dataArray[topTwo];
+        const top = dataArray[topTwo];
         dataArray[topTwo++] = null;
         return top;
       } return null;
@@ -527,7 +537,7 @@ function arrayWithThreeStack(size) {
           console.error('First Stack is empty');
           return;
         }
-        var top = dataArray[topOne];
+        const top = dataArray[topOne];
         dataArray[topOne--] = null;
         return top;
       } if (stackId === 2) {
@@ -535,7 +545,7 @@ function arrayWithThreeStack(size) {
           console.error('Second Stack is empty');
           return;
         }
-        var top = dataArray[topTwo];
+        const top = dataArray[topTwo];
         dataArray[topTwo++] = null;
         return top;
       } if (stackId === 3) {
@@ -543,7 +553,7 @@ function arrayWithThreeStack(size) {
           console.error('Third Stack is empty');
           return;
         }
-        var top = dataArray[topThree];
+        const top = dataArray[topThree];
         if (topThree > baseThree) {
           dataArray[topThree--] = null;
         }
@@ -593,7 +603,7 @@ function arrayWithThreeStack(size) {
 function arrayWithMultipleStack(size, m) {
   const dataArray = [];
   const base = [];
-  const top = [];
+  let top = [];
 
   if (size < m) {
     console.error(`Size <${m} is not possible`);
@@ -602,22 +612,26 @@ function arrayWithMultipleStack(size, m) {
 
   return {
     pushInStack(stackId, data) {
-      if (top[i] === base[i + 1]) {
-        // Print ith Stack is full and does the shifting
-        // TO-DO
-      } else {
-        dataArray[++top[i]] = data;
+      for (let i = 0; i < size; i++) {
+        if (top[i] === base[i + 1]) {
+          // Print ith Stack is full and does the shifting
+          // TO-DO
+        } else {
+          dataArray[++top[i]] = data;
+        }
       }
     },
 
     popFromStack(stackId) {
-      if (top[i] === base[i]) {
-        console.error('Stack is empty');
-        return;
+      for (let i = 0; i < size; i++) {
+        if (top[i] === base[i]) {
+          console.error('Stack is empty');
+          return;
+        }
+        top = dataArray[top[i]];
+        dataArray[top[i]--] = null;
+        return top;
       }
-      var top = dataArray[top[i]];
-      dataArray[top[i]--] = null;
-      return top;
     },
 
     top(stackId) {
@@ -632,3 +646,5 @@ function arrayWithMultipleStack(size, m) {
 
 // Problem-18 Consider an empty stack of integers. Let the numbers 1,2,3,4,5,6 be pushed on to this stack only in the order they appear from left to right.
 // Let S indicates a push and X indicates a pop operation. Can the be permuted in to the order? If so, then give the order string of operation.
+
+export default { LLStack };
