@@ -1,5 +1,6 @@
-import { Fact } from './chapter 02';
-import { getMax, bucketSort } from './chapter 10';
+import bucketSort from '../chapter10/bubbleSort';
+import Fact from '../chapter02/factorial';
+import getMax from '../chapter10/getMax';
 
 // 11.3 Types of Searching
 
@@ -89,20 +90,19 @@ function checkDuplicatesInArrayWithAsssumptionOfValues(array) {
 
 // Problem-8 For Problem-5 solution, can we improve the time complexity? Assume that array have all numbers are from rangle [0, n-1]
 function maxRepetitionsWithAsssumptionOfValues(array) {
-  let i = 0;
   let max = 0;
   let maxIndex = 0;
   const { length } = array;
-  for (i = 0; i < length; i++) {
+  for (let i = 0; i < length; i++) {
     array[array[i] % length] += length;
   }
-  for (i = 0; i < length; i++) {
-    if (array[i] / n > max) {
-      max = array[i] / n;
+  for (let i = 0; i < length; i++) {
+    if (array[i] / length > max) {
+      max = array[i] / length;
       maxIndex = i;
     }
   }
-  return i;
+  return maxIndex;
 }
 
 // Problem-9 Given the array of n numbers, give an algorithm to find first element in the array which is repeated.
@@ -299,7 +299,7 @@ function printRepeatedElementsUsingSP(array, n) {
     S += array[i];
     P *= array[i];
   }
-  S -= (n * (n + 1) / 2);
+  S -= (n * (n + 1)) / 2;
   P /= Fact(n);
   const D = Math.sqrt(S * S - 4 * P);
 

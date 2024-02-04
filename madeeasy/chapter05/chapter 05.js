@@ -1,5 +1,5 @@
-import { ListNode } from './chapter 03';
-import { LLStack } from './chapter 04';
+import ListNode from '../chapter03/linkList';
+import LLStack from '../chapter04/chapter 04';
 
 // 5.6 Implementation
 // Simple Circular Array Implementation of Queue

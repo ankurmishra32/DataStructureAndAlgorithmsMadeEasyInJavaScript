@@ -1,4 +1,4 @@
-import { ListNode } from './chapter 03';
+import ListNode from '../chapter03/linkList';
 // 4.6 Implementation
 // Simple Array Implementation of Stack
 function ArrayStack(size) {
@@ -647,4 +647,4 @@ function arrayWithMultipleStack(size, m) {
 // Problem-18 Consider an empty stack of integers. Let the numbers 1,2,3,4,5,6 be pushed on to this stack only in the order they appear from left to right.
 // Let S indicates a push and X indicates a pop operation. Can the be permuted in to the order? If so, then give the order string of operation.
 
-export default { LLStack };
+export default LLStack;
