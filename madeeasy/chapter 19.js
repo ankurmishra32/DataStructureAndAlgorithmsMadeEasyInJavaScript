@@ -168,3 +168,38 @@ function maxContigousSumUsingDP(array) {
   }
   return maxValue;
 }
+
+// Problem-7 Is there any other way of solving Problem-4?
+function maxContigousSumWithoutDP(array) {
+  let sumSoFar = 0;
+  let sumEndingHere = 0;
+  for (let i = 0; i < array.length; i++) {
+    sumEndingHere += array[i];
+    if (sumEndingHere < 0) {
+      sumEndingHere = 0;
+      continue;
+    }
+    if (sumSoFar < sumEndingHere) {
+      sumSoFar = sumEndingHere;
+    }
+  }
+  return sumSoFar;
+}
+
+// Problem-8 In Problem-6 solution, we have assumed that Memoization(i) indicates maximum sum over all windows ending at i.
+// Can we assume Memoization(i) indicates maximum sum over all windows starting at i and ending at n?
+function maxContigousSumUsingDPModified(array) {
+  const memoization = [];
+  let maxValue = 0;
+  memoization[0] = array[0] > 0 ? array[0] : 0;
+  for (let i = 1; i < array.length; i++) {
+    memoization[i] = memoization[i + 1] + array[i];
+    if (memoization[i] < 0) {
+      memoization[i] = 0;
+    }
+    if (maxValue < memoization[i]) {
+      maxValue = memoization[i];
+    }
+  }
+  return maxValue;
+}

@@ -1,23 +1,25 @@
 // 3.6 Single Linked Lists
-function ListNode() {
-  let data = null;
-  let next = null;
+class ListNode {
+  constructor() {
+    this.data = null;
+    this.next = null;
+  }
 
-  // closure
-  return {
-    setData(val) {
-      data = val;
-    },
-    getData() {
-      return data;
-    },
-    setNext(node) {
-      next = node;
-    },
-    getNext() {
-      return next;
-    },
-  };
+  setData(val) {
+    this.data = val;
+  }
+
+  getData() {
+    return this.data;
+  }
+
+  setNext(node) {
+    this.next = node;
+  }
+
+  getNext() {
+    return this.next;
+  }
 }
 
 // Traversing the Linked List
@@ -98,32 +100,36 @@ function PrintListData(headNode) {
 
 //----------
 // 3.7 Doubly Linked Lists
-function DLLNode() {
-  let data = null;
-  let next = null;
-  let previous = null;
+class DLLNode {
+  constructor() {
+    this.data = null;
+    this.next = null;
+    this.previous = null;
+  }
 
-  // closure
-  return {
-    setData(val) {
-      data = val;
-    },
-    getData() {
-      return data;
-    },
-    setNext(node) {
-      next = node;
-    },
-    getNext() {
-      return next;
-    },
-    setPrevious(node) {
-      previous = node;
-    },
-    getPrevious() {
-      return previous;
-    },
-  };
+  setData(val) {
+    this.data = val;
+  }
+
+  getData() {
+    return this.data;
+  }
+
+  setNext(node) {
+    this.next = node;
+  }
+
+  getNext() {
+    return this.next;
+  }
+
+  setPrevious(node) {
+    this.previous = node;
+  }
+
+  getPrevious() {
+    return this.previous;
+  }
 }
 
 // Inserting a node in Doubly Linked List
@@ -191,25 +197,27 @@ function DLLDelete(headNode, position) {
 
 //----------
 // 3.8 Single Linked Lists
-function CLLNode() {
-  let data = null;
-  let next = null;
+class CLLNode {
+  constructor() {
+    this.data = null;
+    this.next = null;
+  }
 
-  // closure
-  return {
-    setData(val) {
-      data = val;
-    },
-    getData() {
-      return data;
-    },
-    setNext(node) {
-      next = node;
-    },
-    getNext() {
-      return next;
-    },
-  };
+  setData(val) {
+    this.data = val;
+  }
+
+  getData() {
+    return this.data;
+  }
+
+  setNext(node) {
+    this.next = node;
+  }
+
+  getNext() {
+    return this.next;
+  }
 }
 
 // Traversing the Linked List
@@ -731,4 +739,4 @@ function getJosephusPosition(N, M) {
   console.log('Last player left standing is: ', head.getData());
 }
 
-export default { ListNode };
+module.export = ListNode;
