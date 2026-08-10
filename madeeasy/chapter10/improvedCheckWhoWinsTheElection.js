@@ -1,4 +1,4 @@
-import shellSort from './shellSort';
+import shellSort from './shellSort.js';
 
 // Problem-4 Can we improve the complexity of Problem-3
 function improvedCheckWhoWinsTheElection(array) {
@@ -21,3 +21,4 @@ function improvedCheckWhoWinsTheElection(array) {
     }
   }
 }
+export default improvedCheckWhoWinsTheElection;

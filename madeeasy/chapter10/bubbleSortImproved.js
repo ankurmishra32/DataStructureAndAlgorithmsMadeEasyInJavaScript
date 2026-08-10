@@ -1,4 +1,4 @@
-import swap from './swap';
+import swap from './swap.js';
 
 // Above algorithm takes O(n^2) even in best case. We can improve it using an extra flag
 // The only case where we can skip the remaining pass if array is already sorted. Best case O(n).
@@ -15,3 +15,4 @@ function bubbleSortImproved(array) {
     }
   }
 }
+export default bubbleSortImproved;

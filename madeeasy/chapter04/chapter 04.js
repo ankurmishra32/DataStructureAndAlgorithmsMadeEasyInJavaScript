@@ -1,4 +1,4 @@
-import ListNode from '../chapter03/linkList';
+import ListNode from '../chapter03/linkList.js';
 // 4.6 Implementation
 // Simple Array Implementation of Stack
 function ArrayStack(size) {

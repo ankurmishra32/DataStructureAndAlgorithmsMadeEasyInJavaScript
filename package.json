@@ -1,12 +1,14 @@
 {
   "name": "learn_javascript",
   "version": "1.0.0",
+  "type": "module",
   "description": "\"This will add dependencies related to application\"",
   "main": "index.html",
   "scripts": {
     "eslint": "eslint --cache --ext .js madeeasy/",
     "lite": "lite-server --port 10001",
-    "start": "npm run lite"
+    "start": "npm run lite",
+    "test": "node --test tests/*.test.js"
   },
   "repository": {
     "type": "git",

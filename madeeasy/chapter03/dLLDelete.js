@@ -1,5 +1,5 @@
-import ListNode from './linkList';
-import ListLength from './listLength';
+import ListNode from './linkList.js';
+import ListLength from './listLength.js';
 
 // Deleting a node in Doubly Linked List
 function DLLDelete(headNode, position) {
@@ -30,3 +30,4 @@ function DLLDelete(headNode, position) {
   }
   currentNode = null;
 }
+export default DLLDelete;

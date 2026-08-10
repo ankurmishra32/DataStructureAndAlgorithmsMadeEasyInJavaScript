@@ -1,4 +1,4 @@
-import swap from './swap';
+import swap from './swap.js';
 
 // 10.11 Quicksort
 function partition(array, low, high) {

@@ -8,24 +8,27 @@ function recursiveFibonacci(num) {
   return recursiveFibonacci(num - 1) + recursiveFibonacci(num - 2);
 }
 
-const fibonacci = [];
-
 // Bottom-up approach
 function fibonacciBottomUp(num) {
-  fibonacci[0] = 0;
-  fibonacci[1] = 1;
+  // Local cache — original code used a module-scoped `fibonacci[]` which
+  // was shared with fibonacciTopDown, causing order-dependent results.
+  const memo = [0, 1];
   for (let i = 2; i <= num; i++) {
-    fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+    memo[i] = memo[i - 1] + memo[i - 2];
   }
-  return fibonacci[num];
+  return memo[num];
 }
 
 // Top-down approach
 function fibonacciTopDown(num) {
-  if (num === 0) return 0;
-  if (num === 1) return 1;
-  if (fibonacci[num] !== undefined) return fibonacci[num];
-  return fibonacciTopDown(num - 1) + fibonacciTopDown(num - 2);
+  // Local cache, fresh per call, so we don't depend on prior call state.
+  const memo = [0, 1];
+  function helper(n) {
+    if (memo[n] !== undefined) return memo[n];
+    memo[n] = helper(n - 1) + helper(n - 2);
+    return memo[n];
+  }
+  return helper(num);
 }
 
 // Further Improvement
@@ -34,7 +37,7 @@ function improvedFibonacci(num) {
   if (num === 1) return 1;
   let a = 0;
   let b = 1;
-  let sum;
+  let sum = 0;
   for (let i = 1; i < num; i++) {
     sum = a + b;
     a = b;
@@ -56,10 +59,12 @@ function LCSLength(X, i, m, Y, j, n) {
 }
 
 // DP solution, adding memoization
-const LCS = [];
 function LCSLengthUsingDP(X, Y) {
   const m = X.length;
   const n = Y.length;
+  // Local memo table — original used module-scoped `LCS` which broke
+  // when called multiple times (subsequent calls saw stale state).
+  const LCS = [];
   for (let i = 0; i <= m; i++) {
     LCS[i] = [];
     LCS[i][n] = 0;
@@ -203,3 +208,21 @@ function maxContigousSumUsingDPModified(array) {
   }
   return maxValue;
 }
+
+// Named exports so tests can import individual functions.
+export {
+  recursiveFibonacci,
+  fibonacciBottomUp,
+  fibonacciTopDown,
+  improvedFibonacci,
+  LCSLength,
+  LCSLengthUsingDP,
+  recurrenceToCode,
+  recurrenceToCodeUsingDP,
+  improvedRecurrenceToCode,
+  maxContigousSum,
+  maxContigousSumImproved,
+  maxContigousSumUsingDP,
+  maxContigousSumWithoutDP,
+  maxContigousSumUsingDPModified,
+};

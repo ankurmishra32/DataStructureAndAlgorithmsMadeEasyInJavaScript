@@ -13,4 +13,5 @@ function Fact(n) {
   return n * Fact(n - 1);
 }
 
+export { Fact };
 export default { Fact };

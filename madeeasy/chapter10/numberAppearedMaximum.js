@@ -1,4 +1,4 @@
-import quickSort from './quickSort';
+import quickSort from './quickSort.js';
 
 // Problem-5 Can we further improve complexity of Problem-3
 // Use Counting-Sort as no of candidates will be very less compare to votes.
@@ -33,3 +33,4 @@ function numberAppearedMaximum(array) {
   }
   console.log('Number:', number, 'Count:', max);
 }
+export default numberAppearedMaximum;

@@ -1,4 +1,4 @@
-import ListLength from './listLength';
+import ListLength from './listLength.js';
 
 // Inserting a node in Singly Linked List
 function InsertInLinkedList(headNode, nodeToInsert, position) {

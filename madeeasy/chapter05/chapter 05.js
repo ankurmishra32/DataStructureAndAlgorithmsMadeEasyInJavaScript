@@ -1,5 +1,5 @@
-import ListNode from '../chapter03/linkList';
-import LLStack from '../chapter04/chapter 04';
+import ListNode from '../chapter03/linkList.js';
+import LLStack from '../chapter04/chapter 04.js';
 
 // 5.6 Implementation
 // Simple Circular Array Implementation of Queue
@@ -224,3 +224,5 @@ function StackWithTwoQueues() {
     },
   };
 }
+
+export default ArrayQueue;

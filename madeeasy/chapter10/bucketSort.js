@@ -1,4 +1,4 @@
-import getMax from './getMax';
+import getMax from './getMax.js';
 
 // 10.16 Bucket sort
 function bucketSort(array, BUCKET) {

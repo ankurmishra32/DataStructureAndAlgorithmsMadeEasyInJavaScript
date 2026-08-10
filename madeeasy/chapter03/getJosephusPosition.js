@@ -1,5 +1,5 @@
-import ListNode from './linkList';
-import PrintCircularListData from './printCircularListData';
+import ListNode from './linkList.js';
+import PrintCircularListData from './printCircularListData.js';
 
 // Problem-41 Josephus Circle: Josephus Problem (or Josephus permutation) is a theoretical problem
 // related to a certain counting-out game. N people have decided to elect a leader by arranging

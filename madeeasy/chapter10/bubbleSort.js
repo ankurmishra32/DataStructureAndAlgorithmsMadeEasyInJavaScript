@@ -1,4 +1,4 @@
-import swap from './swap';
+import swap from './swap.js';
 
 // 10.5 Bubble sort
 function bubbleSort(array) {
@@ -11,3 +11,4 @@ function bubbleSort(array) {
     }
   }
 }
+export default bubbleSort;

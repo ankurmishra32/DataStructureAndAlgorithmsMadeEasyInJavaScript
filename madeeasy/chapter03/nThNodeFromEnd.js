@@ -1,4 +1,4 @@
-import ListLength from './listLength';
+import ListLength from './listLength.js';
 
 // Problem-2 Find nth node from the end of Linked List
 // Brute-Force Approach
@@ -15,3 +15,4 @@ function nThNodeFromEnd(headNode, position) {
   }
   nThNodeFromEnd(headNode.getNext(), position);
 }
+export default nThNodeFromEnd;

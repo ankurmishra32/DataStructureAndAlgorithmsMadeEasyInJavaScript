@@ -1,4 +1,4 @@
-import ListNode from './linkList';
+import ListNode from './linkList.js';
 
 // Iterative version
 function reversePairIterative(head) {
@@ -19,3 +19,4 @@ function reversePairIterative(head) {
   }
   return temp.getNext();
 }
+export default reversePairIterative;

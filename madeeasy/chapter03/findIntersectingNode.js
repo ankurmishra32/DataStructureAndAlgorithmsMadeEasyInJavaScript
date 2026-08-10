@@ -1,4 +1,4 @@
-import ListLength from './listLength';
+import ListLength from './listLength.js';
 
 // Problem-23 Can we improve the complexity of Problem-17
 // Efficient Approach
@@ -24,3 +24,4 @@ function findIntersectingNode(headOfFirst, headOfSecond) {
   }
   return null;
 }
+export default findIntersectingNode;

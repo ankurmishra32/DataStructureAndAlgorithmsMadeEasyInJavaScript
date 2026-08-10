@@ -1,4 +1,4 @@
-import ListLength from './listLength';
+import ListLength from './listLength.js';
 
 // Inserting a node in Doubly Linked List
 function DLLInsert(headNode, nodeToInsert, position) {
@@ -32,3 +32,4 @@ function DLLInsert(headNode, nodeToInsert, position) {
   previousNode.setNext(nodeToInsert);
   nodeToInsert.setPrevious(previousNode);
 }
+export default DLLInsert;

@@ -1,4 +1,4 @@
-import swap from './swap';
+import swap from './swap.js';
 
 // 10.6 Selection sort
 function selectionSort(array) {
@@ -16,3 +16,4 @@ function selectionSort(array) {
     swap(array, min, pass);
   }
 }
+export default selectionSort;

@@ -1,4 +1,4 @@
-import ListLength from './listLength';
+import ListLength from './listLength.js';
 
 // Problem-4 Can we use Problem-3 approach for solving Problem-2 without creating hash table
 
@@ -17,3 +17,4 @@ function nThNodeFromEndWithoutHash(headNode, position) {
   }
   console.log('nTh node from end is ', currentNode);
 }
+export default nThNodeFromEndWithoutHash;

@@ -1,4 +1,4 @@
-import getMax from './getMax';
+import getMax from './getMax.js';
 
 // 10.15 Counting sort
 function countingSort(array, limit, exp) {

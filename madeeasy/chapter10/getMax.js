@@ -7,3 +7,4 @@ function getMax(array) {
   }
   return max;
 }
+export default getMax;

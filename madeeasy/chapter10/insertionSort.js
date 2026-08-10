@@ -11,3 +11,4 @@ function insertionSort(array) {
     array[i + 1] = temp;
   }
 }
+export default insertionSort;

@@ -15,3 +15,5 @@ function findMiddle(headNode) {
   }
   return temp;
 }
+
+export default findMiddle;

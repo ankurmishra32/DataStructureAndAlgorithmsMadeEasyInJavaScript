@@ -1,4 +1,4 @@
-import shellSort from './shellSort';
+import shellSort from './shellSort.js';
 
 // Problem-2 Can we improve the time complexity of Problem-1
 // Use Heap-Sort as it have O(n log n) running complexity and use O(1) additional space.
@@ -11,3 +11,4 @@ function improvedCheckDuplicatesInArray(array) {
   }
   return false;
 }
+export default improvedCheckDuplicatesInArray;

@@ -16,9 +16,11 @@ function merge(array, temp, left, mid, right) {
   while (mid <= right) {
     temp[tempPos++] = array[mid++];
   }
-  for (let i = 0; i <= size; i++) {
-    array[right] = temp[right];
-    right--;
+  // Copy the merged chunk from temp back into the original array.
+  // We need to copy each of the `size` merged elements from
+  // temp[left..right] back to the same positions in array.
+  for (let i = 0; i < size; i++) {
+    array[right - i] = temp[right - i];
   }
 }
 
@@ -35,3 +37,4 @@ function mergeSort(array, temp, left, right) {
     merge(array, temp, left, mid + 1, right);
   }
 }
+export default mergeSort;

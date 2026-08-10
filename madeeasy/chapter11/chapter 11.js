@@ -1,6 +1,6 @@
-import bucketSort from '../chapter10/bubbleSort';
-import Fact from '../chapter02/factorial';
-import getMax from '../chapter10/getMax';
+import bucketSort from '../chapter10/bubbleSort.js';
+import { Fact } from '../chapter02/factorial.js';
+import getMax from '../chapter10/getMax.js';
 
 // 11.3 Types of Searching
 
@@ -305,3 +305,24 @@ function printRepeatedElementsUsingSP(array, n) {
 
   console.log((S - D) / 2, (S + D) / 2);
 }
+
+// Named exports so tests can import individual functions.
+export {
+  unorderedLinearSearch,
+  orderedLinearSearch,
+  binarySearchIterative,
+  binarySearchRecursive,
+  checkDuplicatesInArrayWithAsssumptionOfValues,
+  maxRepetitionsWithAsssumptionOfValues,
+  firstRepeatBruteForce,
+  findMissingNumberBruteForse,
+  findMissingNumberUsingSorting,
+  improvedFindMissingNumber,
+  findMissingNumberUsingXOR,
+  findNumberOccurOddTimesUsingXOR,
+  printRepeatedElementsUsingBruteForce,
+  printRepeatedElementsUsingSorting,
+  printRepeatedElementUsingCounting,
+  printRepeatedElementsUsingXOR,
+  printRepeatedElementsUsingSP,
+};

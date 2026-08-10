@@ -1,5 +1,5 @@
-import ListNode from './linkList';
-import ListLength from './listLength';
+import ListNode from './linkList.js';
+import ListLength from './listLength.js';
 
 // Deleting a node in Singly Linked List
 function DeleteNodeFromLinkedList(headNode, position) {
@@ -25,3 +25,4 @@ function DeleteNodeFromLinkedList(headNode, position) {
   previousNode.setNext(currentNode.getNext());
   currentNode = null;
 }
+export default DeleteNodeFromLinkedList;

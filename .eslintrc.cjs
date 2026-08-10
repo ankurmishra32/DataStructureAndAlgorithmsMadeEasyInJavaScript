@@ -2,6 +2,8 @@ module.exports = {
   extends: 'airbnb-base',
   rules: {
     'consistent-return': 0,
+    'import/extensions': 0,
+    'linebreak-style': 0,
     'max-classes-per-file': 0,
     'max-len': 0,
     'no-bitwise': 0,

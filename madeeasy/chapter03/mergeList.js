@@ -1,4 +1,4 @@
-import ListNode from './linkList';
+import ListNode from './linkList.js';
 
 // Problem-31 Given two sorted linked lists, we need to merge them into the third list in sorted order
 function mergeList(headOfFirst, headOfSecond) {
@@ -18,3 +18,4 @@ function mergeList(headOfFirst, headOfSecond) {
   }
   return temp;
 }
+export default mergeList;
