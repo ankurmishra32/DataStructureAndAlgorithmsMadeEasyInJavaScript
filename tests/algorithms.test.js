@@ -80,7 +80,7 @@ test('reversePairIterative swaps pairs', async () => {
 // ===== Chapter 4 — Stacks =====
 
 test('LLStack push and pop', async () => {
-  const LLStack = (await import('../madeeasy/chapter04/chapter 04.js')).default;
+  const LLStack = (await import('../madeeasy/chapter04/linkedListStack.js')).default;
   const s = new LLStack();
   s.pushInStack(1); s.pushInStack(2); s.pushInStack(3);
   assert.equal(s.popFromStack(), 3);
@@ -92,7 +92,7 @@ test('LLStack push and pop', async () => {
 // ===== Chapter 5 — Queues =====
 
 test('ArrayQueue enqueue and dequeue', async () => {
-  const { default: ArrayQueue } = await import('../madeeasy/chapter05/chapter 05.js');
+  const { default: ArrayQueue } = await import('../madeeasy/chapter05/arrayQueue.js');
   const q = new ArrayQueue(5);
   q.enQueue('a'); q.enQueue('b'); q.enQueue('c');
   assert.equal(q.deQueue(), 'a');
@@ -171,13 +171,13 @@ test('bucketSort sorts in place', async () => {
 // ===== Chapter 11 — Searching =====
 
 test('unorderedLinearSearch finds item', async () => {
-  const { unorderedLinearSearch } = await import('../madeeasy/chapter11/chapter 11.js');
+  const { default: unorderedLinearSearch } = await import('../madeeasy/chapter11/unorderedLinearSearch.js');
   assert.equal(unorderedLinearSearch([4, 2, 7, 1], 7), 2);
   assert.equal(unorderedLinearSearch([4, 2, 7, 1], 99), -1);
 });
 
 test('binarySearch finds item', async () => {
-  const { binarySearchIterative } = await import('../madeeasy/chapter11/chapter 11.js');
+  const { default: binarySearchIterative } = await import('../madeeasy/chapter11/binarySearchIterative.js');
   assert.equal(binarySearchIterative([1, 2, 3, 4, 5, 6, 7, 8], 5), 4);
   assert.equal(binarySearchIterative([1, 2, 3, 4, 5, 6, 7, 8], 99), -1);
 });
@@ -185,8 +185,10 @@ test('binarySearch finds item', async () => {
 // ===== Chapter 19 — Dynamic Programming =====
 
 test('recursiveFibonacci returns correct sequence', async () => {
-  const { recursiveFibonacci, fibonacciBottomUp, fibonacciTopDown, improvedFibonacci } =
-    await import('../madeeasy/chapter19/chapter 19.js');
+  const { default: recursiveFibonacci } = await import('../madeeasy/chapter19/recursiveFibonacci.js');
+  const { default: fibonacciBottomUp } = await import('../madeeasy/chapter19/fibonacciBottomUp.js');
+  const { default: fibonacciTopDown } = await import('../madeeasy/chapter19/fibonacciTopDown.js');
+  const { default: improvedFibonacci } = await import('../madeeasy/chapter19/improvedFibonacci.js');
   const expected = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55];
   for (let n = 0; n < expected.length; n++) {
     assert.equal(recursiveFibonacci(n), expected[n], `recursive n=${n}`);
@@ -197,7 +199,7 @@ test('recursiveFibonacci returns correct sequence', async () => {
 });
 
 test('fibonacciBottomUp is independent across calls (was bug — global state fix)', async () => {
-  const { fibonacciBottomUp } = await import('../madeeasy/chapter19/chapter 19.js');
+  const { default: fibonacciBottomUp } = await import('../madeeasy/chapter19/fibonacciBottomUp.js');
   // Call with a small n first (would poison the old global cache), then with larger.
   assert.equal(fibonacciBottomUp(3), 2);
   assert.equal(fibonacciBottomUp(10), 55);
@@ -205,7 +207,7 @@ test('fibonacciBottomUp is independent across calls (was bug — global state fi
 });
 
 test('LCSLengthUsingDP works for repeated calls (was bug — global state fix)', async () => {
-  const { LCSLengthUsingDP } = await import('../madeeasy/chapter19/chapter 19.js');
+  const { default: LCSLengthUsingDP } = await import('../madeeasy/chapter19/lcsLengthUsingDP.js');
   assert.equal(LCSLengthUsingDP('ABCBDAB', 'BDCAB'), 4);
   assert.equal(LCSLengthUsingDP('AGGTAB', 'GXTXAYB'), 4);
   assert.equal(LCSLengthUsingDP('ABCBDAB', 'BDCAB'), 4); // still 4 after second call

@@ -19,3 +19,5 @@ function checkWhoWinsTheElection(array) {
   }
   return candidate;
 }
+
+export default checkWhoWinsTheElection;

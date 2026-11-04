@@ -2,11 +2,14 @@
 function reserveList(headNode) {
   let temp = null;
   let nextNode = null;
-  while (headNode) {
-    nextNode = headNode.getNext();
-    headNode.setNext(temp);
-    temp = headNode;
-    headNode = nextNode;
+  let currentNode = headNode;
+  while (currentNode) {
+    nextNode = currentNode.getNext();
+    currentNode.setNext(temp);
+    temp = currentNode;
+    currentNode = nextNode;
   }
-  headNode = temp;
+  return temp;
 }
+
+export default reserveList;

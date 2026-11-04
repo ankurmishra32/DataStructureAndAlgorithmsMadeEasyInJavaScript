@@ -17,7 +17,7 @@ function countingSort(array, limit, exp) {
   for (let i = 0; i < length; i++) {
     // temp[array[i]]++;
     // modified for radix sort
-    temp[(array[i] / exp) % limit]++;
+    temp[Math.floor(array[i] / exp) % limit]++;
   }
   // complexity O(limit)
   for (let i = 1; i < limit; i++) {
@@ -27,10 +27,10 @@ function countingSort(array, limit, exp) {
   for (let i = length - 1; i >= 0; i--) {
     // result[temp[array[i]] - 1] = array[i];
     // modified for radix sort
-    result[temp[(array[i] / exp) % limit] - 1] = array[i];
+    result[temp[Math.floor(array[i] / exp) % limit] - 1] = array[i];
     // temp[array[i]]--;
     // modified for radix sort
-    temp[(array[i] / exp) % limit]--;
+    temp[Math.floor(array[i] / exp) % limit]--;
   }
   // modified array to get the result
   for (let i = 0; i < length; i++) {

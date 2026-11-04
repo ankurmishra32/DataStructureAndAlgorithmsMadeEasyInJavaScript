@@ -1,15 +1,20 @@
 // Deleting the Last Node in a Circular Linked List
 function DeleteLastNodeFromCLL(headNode) {
-  let temp = headNode;
-  let currentNode = headNode;
   if (!headNode) {
     console.error('List Empty');
-    return;
+    return null;
   }
+  if (headNode.getNext() === headNode) {
+    return null;
+  }
+  let previousNode = headNode;
+  let currentNode = headNode.getNext();
   while (currentNode.getNext() !== headNode) {
-    temp = currentNode;
+    previousNode = currentNode;
     currentNode = currentNode.getNext();
   }
-  currentNode = null;
-  temp.setNext(headNode);
+  previousNode.setNext(headNode);
+  return headNode;
 }
+
+export default DeleteLastNodeFromCLL;

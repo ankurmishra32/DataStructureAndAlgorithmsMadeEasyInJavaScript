@@ -4,7 +4,7 @@ function shellSortByKarumanchi(array) {
   const { length } = array;
   for (h = 1; h < length / 9; h = 3 * h + 1);
   for (; h > 0; h = Math.floor(h / 3)) {
-    for (let i = h + 1; i < length; i++) {
+    for (let i = h; i < length; i++) {
       const v = array[i];
       let j = i;
       while (j >= h && array[j - h] > v) {
@@ -15,3 +15,5 @@ function shellSortByKarumanchi(array) {
     }
   }
 }
+
+export default shellSortByKarumanchi;

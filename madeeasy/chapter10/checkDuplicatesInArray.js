@@ -9,3 +9,5 @@ function checkDuplicatesInArray(array) {
   }
   return false;
 }
+
+export default checkDuplicatesInArray;
